@@ -58,58 +58,27 @@ h3 { font-size: 22px; color: #0f3460; margin: 24px 0 12px; }
   padding: 18px;
   border-left: 4px solid #0f3460;
   text-align: center;
+  position: relative;
 }
 .equip-card .icon { font-size: 40px; display: block; margin-bottom: 6px; }
 .equip-card h4 { font-size: 18px; color: #1a1a2e; }
 .equip-card p { font-size: 15px; color: #7f8c8d; margin-top: 4px; }
 .equip-card.main { border-left-color: #e94560; background: #fff5f5; }
 .equip-card.highlight { border-left-color: #ff6b35; background: #fff8f0; }
-
-/* Wiring diagram */
-.wiring {
-  background: #1a1a2e;
-  border-radius: 16px;
-  padding: 32px 20px;
-  color: #fff;
-  margin: 20px 0;
-}
-.wire-box {
-  background: rgba(255,255,255,0.1);
-  border: 2px solid rgba(255,255,255,0.3);
+.equip-badge {
+  display: inline-block;
+  background: #fff3cd;
+  color: #856404;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
   border-radius: 12px;
-  padding: 16px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 18px;
-  max-width: 500px;
-  margin: 0 auto;
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
-.wire-box.source { border-color: #2ecc71; background: rgba(46,204,113,0.15); }
-.wire-box.mixer { border-color: #f39c12; background: rgba(243,156,18,0.15); }
-.wire-box.amp { border-color: #e94560; background: rgba(233,69,96,0.15); }
-.wire-box.tv { border-color: #3498db; background: rgba(52,152,219,0.15); }
-.wire-box.speaker { border-color: #ff6b35; background: rgba(255,107,53,0.15); }
-.wire-box.sub { border-color: #9b59b6; background: rgba(155,89,182,0.15); }
-.wire-box.mic { border-color: #1abc9c; background: rgba(26,188,156,0.15); }
-.wire-arrow {
-  text-align: center;
-  padding: 8px 0;
-  font-size: 14px;
-  color: #bbb;
-}
-.wire-arrow .line { width: 3px; height: 24px; background: #888; margin: 0 auto; }
-.wire-arrow .label { margin-bottom: 4px; font-size: 15px; }
-.wire-split {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 8px;
-}
-.wire-split > div { flex: 1; min-width: 180px; max-width: 240px; text-align: center; }
-.wire-side { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 12px 0; }
 
-/* Steps */
+/* Steps - legacy */
 .step {
   background: #f0f7ff;
   border-radius: 12px;
@@ -153,9 +122,244 @@ th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
 }
 @media (max-width: 600px) {
   .section { padding: 24px 18px; }
-  .wiring { padding: 24px 14px; }
-  .wire-box { font-size: 16px; padding: 12px; }
   th, td { padding: 10px 8px; font-size: 15px; }
+}
+
+/* ========== WIRING DIAGRAM V2 ========== */
+.wiring-v2 {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+  border-radius: 20px;
+  padding: 40px 24px 36px;
+  color: #fff;
+  margin: 20px 0;
+  position: relative;
+  overflow: hidden;
+}
+.wiring-v2::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 600px 300px at 20% 10%, rgba(46,204,113,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 400px at 80% 90%, rgba(155,89,182,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.wiring-v2 .diagram-title {
+  text-align: center;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 800;
+  margin-bottom: 8px;
+  letter-spacing: 0.03em;
+}
+.wiring-v2 .diagram-subtitle {
+  text-align: center;
+  font-size: 15px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 32px;
+}
+.dev-box {
+  position: relative;
+  border-radius: 16px;
+  padding: 18px 20px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.5;
+  max-width: 340px;
+  margin: 0 auto;
+  border: 2px solid;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.dev-box:hover { transform: translateY(-2px); }
+.dev-box .dev-icon { font-size: 36px; display: block; margin-bottom: 4px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3)); }
+.dev-box .dev-name { font-size: clamp(16px, 4vw, 19px); font-weight: 800; }
+.dev-box .dev-desc { font-size: 14px; font-weight: 400; opacity: 0.8; margin-top: 4px; line-height: 1.4; }
+.badge-planned {
+  display: inline-block;
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  box-shadow: 0 2px 8px rgba(243,156,18,0.5);
+  animation: badge-pulse 2.5s ease-in-out infinite;
+}
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 2px 8px rgba(243,156,18,0.5); }
+  50% { box-shadow: 0 2px 16px rgba(243,156,18,0.8); }
+}
+.dev-source { border-color: #2ecc71; background: rgba(46,204,113,0.12); box-shadow: 0 0 20px rgba(46,204,113,0.15); }
+.dev-source:hover { box-shadow: 0 0 30px rgba(46,204,113,0.3); }
+.dev-source .dev-name { color: #5dfc8a; }
+.dev-mixer { border-color: #f39c12; background: rgba(243,156,18,0.12); box-shadow: 0 0 20px rgba(243,156,18,0.15); }
+.dev-mixer:hover { box-shadow: 0 0 30px rgba(243,156,18,0.3); }
+.dev-mixer .dev-name { color: #ffc048; }
+.dev-amp { border-color: #e94560; background: rgba(233,69,96,0.12); box-shadow: 0 0 20px rgba(233,69,96,0.15); }
+.dev-amp:hover { box-shadow: 0 0 30px rgba(233,69,96,0.3); }
+.dev-amp .dev-name { color: #ff7b93; }
+.dev-tv { border-color: #3498db; background: rgba(52,152,219,0.12); box-shadow: 0 0 20px rgba(52,152,219,0.15); }
+.dev-tv:hover { box-shadow: 0 0 30px rgba(52,152,219,0.3); }
+.dev-tv .dev-name { color: #6ec6ff; }
+.dev-speaker { border-color: #ff6b4a; background: rgba(255,107,74,0.12); box-shadow: 0 0 20px rgba(255,107,74,0.15); }
+.dev-speaker:hover { box-shadow: 0 0 30px rgba(255,107,74,0.3); }
+.dev-speaker .dev-name { color: #ff9a85; }
+.dev-sub { border-color: #9b59b6; background: rgba(155,89,182,0.12); box-shadow: 0 0 20px rgba(155,89,182,0.15); }
+.dev-sub:hover { box-shadow: 0 0 30px rgba(155,89,182,0.3); }
+.dev-sub .dev-name { color: #c89bdb; }
+.dev-mic { border-color: #1abc9c; background: rgba(26,188,156,0.12); box-shadow: 0 0 20px rgba(26,188,156,0.15); }
+.dev-mic:hover { box-shadow: 0 0 30px rgba(26,188,156,0.3); }
+.dev-mic .dev-name { color: #5ce8c6; }
+.conn { display: flex; flex-direction: column; align-items: center; padding: 6px 0; }
+.conn-label { font-size: 13px; font-weight: 600; padding: 4px 14px; border-radius: 20px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); white-space: nowrap; margin-bottom: 4px; }
+.conn-pipe { width: 4px; height: 30px; border-radius: 2px; position: relative; overflow: hidden; }
+.conn-pipe::after { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.7), transparent); animation: flow-down 2s ease-in-out infinite; }
+@keyframes flow-down { 0% { top: -100%; } 100% { top: 200%; } }
+.conn-arrow { font-size: 18px; line-height: 1; margin-top: -2px; }
+.pipe-hdmi { background: #3498db; }
+.pipe-rca { background: #e74c3c; }
+.pipe-63mm { background: #1abc9c; }
+.pipe-spk { background: #ff6b4a; }
+.pipe-wireless { background: #9b59b6; }
+.label-hdmi { color: #6ec6ff; border-color: rgba(52,152,219,0.4); }
+.label-rca { color: #ff8a80; border-color: rgba(231,76,60,0.4); }
+.label-63mm { color: #5ce8c6; border-color: rgba(26,188,156,0.4); }
+.label-spk { color: #ff9a85; border-color: rgba(255,107,74,0.4); }
+.label-wireless { color: #c89bdb; border-color: rgba(155,89,182,0.4); }
+.diagram-row-center { display: flex; flex-direction: column; align-items: center; }
+.branch-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 600px; margin: 0 auto; }
+.branch-col { display: flex; flex-direction: column; align-items: center; }
+.side-input-row { display: flex; align-items: center; justify-content: center; gap: 16px; max-width: 600px; margin: 0 auto; flex-wrap: wrap; }
+.side-conn { display: flex; align-items: center; gap: 8px; }
+.side-conn .conn-pipe-h { width: 40px; height: 4px; border-radius: 2px; position: relative; overflow: hidden; }
+.side-conn .conn-pipe-h::after { content: ''; position: absolute; left: -100%; top: 0; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent); animation: flow-right 2s ease-in-out infinite; }
+@keyframes flow-right { 0% { left: -100%; } 100% { left: 200%; } }
+.side-conn .conn-label { margin-bottom: 0; font-size: 12px; padding: 3px 10px; }
+.side-conn .side-arrow { font-size: 20px; color: rgba(255,255,255,0.5); }
+.output-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 600px; margin: 0 auto; }
+.output-col { display: flex; flex-direction: column; align-items: center; }
+.wireless-waves { text-align: center; font-size: 13px; color: #c89bdb; letter-spacing: 3px; padding: 4px 0; animation: wave-fade 2s ease-in-out infinite; }
+@keyframes wave-fade { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+.wire-legend { margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); }
+.wire-legend h4 { text-align: center; font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 16px; letter-spacing: 0.1em; }
+.legend-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px 16px; max-width: 560px; margin: 0 auto; }
+.legend-item, .legend-cable { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 4px; border: 2px solid; flex-shrink: 0; }
+.legend-line { width: 28px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+.legend-section-title { font-size: 13px; color: rgba(255,255,255,0.45); font-weight: 600; margin-bottom: 4px; margin-top: 14px; text-align: center; }
+
+/* ===== Wiring Steps V2 ===== */
+.wire-step-card { background: #fff; border-radius: 16px; margin: 28px 0; overflow: hidden; box-shadow: 0 3px 16px rgba(0,0,0,0.10); border: 2px solid #e8ecf1; }
+.wire-step-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.14); }
+.step-header { display: flex; align-items: center; gap: 16px; padding: 20px 24px; flex-wrap: wrap; }
+.step-header.hdmi { background: linear-gradient(135deg, #1a73e8 0%, #4a9af5 100%); }
+.step-header.rca { background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%); }
+.step-header.jack63 { background: linear-gradient(135deg, #1e8449 0%, #27ae60 100%); }
+.step-header.speaker { background: linear-gradient(135deg, #d35400 0%, #e67e22 100%); }
+.step-header.wireless { background: linear-gradient(135deg, #7d3c98 0%, #a569bd 100%); }
+.step-circle { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; min-width: 56px; border-radius: 50%; background: rgba(255,255,255,0.95); color: #1a1a2e; font-size: 28px; font-weight: 900; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.step-device-flow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; color: #fff; font-size: 22px; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+.step-device-flow .device-emoji { font-size: 30px; text-shadow: none; }
+.step-device-flow .flow-arrow { font-size: 28px; opacity: 0.9; }
+.badge-planned-inline { display: inline-block; background: #fff3cd; color: #856404; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-left: 4px; vertical-align: middle; text-shadow: none; white-space: nowrap; }
+.step-body { padding: 24px; }
+.cable-indicator { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 24px; font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+.cable-indicator .cable-line { display: inline-block; width: 48px; height: 6px; border-radius: 3px; }
+.cable-hdmi { background: #e8f0fe; color: #1a73e8; }
+.cable-hdmi .cable-line { background: #1a73e8; }
+.cable-rca { background: #fdecea; color: #c0392b; }
+.cable-rca .cable-line { background: #c0392b; }
+.cable-jack63 { background: #e8f8f0; color: #1e8449; }
+.cable-jack63 .cable-line { background: #27ae60; }
+.cable-speaker { background: #fef3e8; color: #d35400; }
+.cable-speaker .cable-line { background: linear-gradient(90deg, #d35400, #e67e22, #d35400); }
+.cable-wireless { background: #f3eaf8; color: #7d3c98; }
+.cable-wireless .cable-line { background: transparent; border-top: 4px dashed #9b59b6; height: 0; margin-top: 3px; }
+.step-instruction { font-size: 20px; line-height: 1.8; color: #2c3e50; margin-bottom: 16px; }
+.step-instruction strong { color: #1a1a2e; background: #fffde7; padding: 1px 6px; border-radius: 4px; }
+.step-result { font-size: 20px; color: #0f3460; font-weight: 600; margin-bottom: 16px; }
+.mini-diagram { display: flex; align-items: center; justify-content: center; gap: 0; margin: 20px 0; flex-wrap: wrap; }
+.mini-box { border: 3px solid #ccc; border-radius: 12px; padding: 14px 18px; text-align: center; font-weight: 700; font-size: 16px; min-width: 120px; max-width: 200px; background: #fff; }
+.mini-box .mini-emoji { font-size: 32px; display: block; margin-bottom: 4px; }
+.mini-box .mini-port { display: block; font-size: 12px; font-weight: 400; color: #888; margin-top: 4px; background: #f8f8f8; border-radius: 4px; padding: 2px 6px; }
+.mini-box.src-karaoke { border-color: #2ecc71; background: #f0fdf4; }
+.mini-box.tgt-tv { border-color: #3498db; background: #f0f7ff; }
+.mini-box.tgt-mixer, .mini-box.src-mixer { border-color: #f39c12; background: #fef9e7; }
+.mini-box.src-mic { border-color: #1abc9c; background: #e8fdf5; }
+.mini-box.tgt-amp, .mini-box.src-amp, .mini-box.src-amp-sub { border-color: #e94560; background: #fef0f3; }
+.mini-box.tgt-speaker { border-color: #ff6b35; background: #fff4ef; }
+.mini-box.tgt-sub { border-color: #9b59b6; background: #f5eef8; }
+.mini-connector { display: flex; flex-direction: column; align-items: center; padding: 0 6px; min-width: 80px; }
+.mini-connector .conn-line { width: 60px; height: 6px; border-radius: 3px; margin: 4px 0; }
+.mini-connector .conn-label { font-size: 12px; color: #666; font-weight: 600; text-align: center; white-space: nowrap; background: transparent; border: none; padding: 0; }
+.mini-connector .conn-arrow { font-size: 22px; color: #999; line-height: 1; }
+.conn-hdmi .conn-line { background: #1a73e8; }
+.conn-rca .conn-line { background: #c0392b; }
+.conn-jack63 .conn-line { background: #27ae60; }
+.conn-speaker .conn-line { background: linear-gradient(90deg, #d35400, #e67e22, #d35400); }
+.conn-wireless .conn-line { background: transparent; border-top: 4px dashed #9b59b6; height: 0; width: 60px; }
+.step-tip { background: #e8f5e9; border-left: 5px solid #4caf50; border-radius: 10px; padding: 14px 18px; margin: 14px 0 4px; font-size: 18px; line-height: 1.7; }
+.step-warn { background: #fff3e0; border-left: 5px solid #ff9800; border-radius: 10px; padding: 14px 18px; margin: 14px 0 4px; font-size: 18px; line-height: 1.7; }
+.step-danger { background: #ffebee; border-left: 5px solid #f44336; border-radius: 10px; padding: 14px 18px; margin: 14px 0 4px; font-size: 18px; line-height: 1.7; }
+.compare-box { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+.compare-item { border-radius: 10px; padding: 14px 16px; font-size: 17px; line-height: 1.7; }
+.compare-correct { background: #e8f5e9; border: 2px solid #4caf50; }
+.compare-wrong { background: #ffebee; border: 2px solid #f44336; }
+.compare-item .compare-label { display: block; font-size: 20px; font-weight: 900; margin-bottom: 6px; }
+.compare-correct .compare-label { color: #2e7d32; }
+.compare-wrong .compare-label { color: #c62828; }
+.polarity-diagram { display: flex; align-items: center; justify-content: center; gap: 32px; margin: 16px 0; flex-wrap: wrap; }
+.polarity-terminal { text-align: center; font-size: 16px; font-weight: 700; }
+.polarity-terminal .terminal-block { width: 80px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 900; color: #fff; margin: 0 auto 6px; }
+.terminal-red { background: #e53935; }
+.terminal-blk { background: #37474f; }
+.polarity-wire { width: 60px; height: 6px; border-radius: 3px; margin: 0 auto 4px; }
+.wire-red-color { background: #e53935; }
+.wire-blk-color { background: #37474f; }
+.power-card { background: #fff; border-radius: 16px; margin: 28px 0; overflow: hidden; box-shadow: 0 3px 16px rgba(0,0,0,0.10); border: 2px solid #e8ecf1; }
+.power-header { display: flex; align-items: center; gap: 16px; padding: 20px 24px; background: linear-gradient(135deg, #1a1a2e 0%, #2c3e6b 100%); color: #fff; font-size: 22px; font-weight: 700; flex-wrap: wrap; }
+.power-header .step-circle { background: #e94560; color: #fff; }
+.power-body { padding: 24px; }
+.power-sequence { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; margin: 16px 0; }
+.power-item { display: flex; flex-direction: column; align-items: center; background: #f8f9ff; border: 2px solid #dfe6ed; border-radius: 12px; padding: 12px 14px; min-width: 90px; text-align: center; }
+.power-item .power-num { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #0f3460; color: #fff; font-size: 18px; font-weight: 900; margin-bottom: 6px; }
+.power-item .power-emoji { font-size: 28px; }
+.power-item .power-label { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-top: 4px; }
+.power-arrow { font-size: 28px; color: #0f3460; font-weight: 900; }
+.power-subtitle { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.power-subtitle.on { color: #2e7d32; }
+.power-subtitle.off { color: #c62828; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .wiring-v2 { padding: 28px 14px; }
+  .dev-box { padding: 14px; max-width: 100%; font-size: 15px; }
+  .dev-box .dev-icon { font-size: 30px; }
+  .dev-box .dev-name { font-size: 15px; }
+  .branch-row, .output-row { grid-template-columns: 1fr; gap: 0; }
+  .side-input-row { flex-direction: column; gap: 0; }
+  .side-conn { flex-direction: column; }
+  .side-conn .conn-pipe-h { width: 4px; height: 28px; }
+  .side-conn .side-arrow { transform: rotate(90deg); }
+  .step-header { padding: 16px 14px; gap: 10px; }
+  .step-circle { width: 44px; height: 44px; min-width: 44px; font-size: 22px; }
+  .step-device-flow { font-size: 18px; }
+  .step-body { padding: 18px 14px; }
+  .step-instruction { font-size: 18px; }
+  .mini-diagram { gap: 0; }
+  .mini-box { min-width: 90px; max-width: 140px; padding: 10px; font-size: 14px; }
+  .mini-connector { min-width: 50px; }
+  .mini-connector .conn-line { width: 36px; }
+  .compare-box { grid-template-columns: 1fr; }
+  .power-item { min-width: 70px; padding: 8px; }
+  .power-item .power-emoji { font-size: 22px; }
+  .power-item .power-label { font-size: 12px; }
+  .power-arrow { font-size: 20px; }
+  .polarity-diagram { gap: 16px; }
+  .badge-planned { font-size: 11px; top: -10px; right: -4px; }
 }
 </style>
 </head>
@@ -173,6 +377,7 @@ th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
     <h2><span class="num">1</span> 我們家有這些設備</h2>
     <div class="equip-grid">
       <div class="equip-card main">
+        <span class="equip-badge">&#128722; 預計購買</span>
         <span class="icon">&#127916;</span>
         <h4>金嗓 CPX-900</h4>
         <p>點歌機（播放音樂和歌詞）</p>
@@ -213,32 +418,15 @@ th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
   <!-- Section 2: Why need mixer -->
   <div class="section">
     <h2><span class="num">2</span> 每台設備做什麼事？</h2>
-
     <div class="tip" style="font-size:20px;">
       <strong>&#128161; 簡單記：三台各做一件事</strong>
     </div>
-
     <table>
-      <tr>
-        <th>設備</th><th>它的工作</th><th>比喻</th>
-      </tr>
-      <tr>
-        <td><strong>&#127916; 金嗓 CPX-900</strong></td>
-        <td>播放伴唱音樂和歌詞畫面</td>
-        <td>點唱機（只放音樂）</td>
-      </tr>
-      <tr>
-        <td><strong>&#127911; FIESTA 混音器</strong></td>
-        <td>把音樂+麥克風人聲混在一起，加迴音效果</td>
-        <td>調音師（把所有聲音調好）</td>
-      </tr>
-      <tr>
-        <td><strong>&#127932; Integra 擴大機</strong></td>
-        <td>把混好的聲音放大，推到喇叭發聲</td>
-        <td>大聲公（只負責放大聲音）</td>
-      </tr>
+      <tr><th>設備</th><th>它的工作</th><th>比喻</th></tr>
+      <tr><td><strong>&#127916; 金嗓 CPX-900</strong></td><td>播放伴唱音樂和歌詞畫面</td><td>點唱機（只放音樂）</td></tr>
+      <tr><td><strong>&#127911; FIESTA 混音器</strong></td><td>把音樂+麥克風人聲混在一起，加迴音效果</td><td>調音師（把所有聲音調好）</td></tr>
+      <tr><td><strong>&#127932; Integra 擴大機</strong></td><td>把混好的聲音放大，推到喇叭發聲</td><td>大聲公（只負責放大聲音）</td></tr>
     </table>
-
     <div class="warn">
       <strong>&#9888;&#65039; 為什麼需要 FIESTA 混音器？</strong><br>
       因為 Integra 是「家庭劇院擴大機」，<strong>沒有麥克風插孔，也沒有迴音功能</strong>。<br>
@@ -246,130 +434,373 @@ th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
     </div>
   </div>
 
-  <!-- Section 3: Wiring diagram -->
+  <!-- Section 3: Wiring diagram (IMPROVED) -->
   <div class="section">
     <h2><span class="num">3</span> 接線圖（照著接就好）</h2>
-
-    <div class="wiring">
-      <div class="wire-box source">&#127916; 金嗓 CPX-900 點歌機</div>
-
-      <div class="wire-split" style="margin-top:12px;">
-        <div>
-          <div class="wire-arrow">
-            <div class="label">&#128246; HDMI 線</div>
-            <div class="line"></div>
-          </div>
-          <div class="wire-box tv">&#128250; 電視<br><span style="font-size:14px; font-weight:normal;">看歌詞畫面</span></div>
-        </div>
-        <div>
-          <div class="wire-arrow">
-            <div class="label">&#127909; RCA 紅白線（音樂聲音）</div>
-            <div class="line"></div>
-          </div>
-          <div style="text-align:center; color:#bbb; font-size:14px;">&#8595; 往下接混音器 &#8595;</div>
+    <div class="wiring-v2">
+      <div class="diagram-title">&#128268; 信號流向圖</div>
+      <div class="diagram-subtitle">從音樂來源到你耳朵聽到的聲音，每一步怎麼走</div>
+      <div class="diagram-row-center">
+        <div class="dev-box dev-source" style="max-width:380px;">
+          <span class="badge-planned">&#128722; 預計購買</span>
+          <span class="dev-icon">&#127916;</span>
+          <div class="dev-name">金嗓 CPX-900 點歌機</div>
+          <div class="dev-desc">播放伴唱音樂，螢幕顯示歌詞</div>
         </div>
       </div>
-
-      <div style="margin-top:16px;"></div>
-
-      <div class="wire-side">
-        <div class="wire-box mic">&#127908; 無線麥克風 x2<br><span style="font-size:14px; font-weight:normal;">插在混音器上</span></div>
-        <span style="font-size:28px;">&#8594;</span>
-        <div class="wire-box mixer">&#127911; FIESTA 混音器<br><span style="font-size:14px; font-weight:normal;">音樂+人聲+迴音<br>全部在這裡混合</span></div>
-      </div>
-
-      <div class="wire-arrow">
-        <div class="label">&#127909; RCA 紅白線（混合好的聲音）</div>
-        <div class="line"></div>
-      </div>
-
-      <div class="wire-box amp">&#127932; Integra DTR-30.4 擴大機<br><span style="font-size:14px; font-weight:normal;">把聲音放大，推到喇叭</span></div>
-
-      <div class="wire-split" style="margin-top:12px;">
-        <div>
-          <div class="wire-arrow">
-            <div class="label">&#128268; 喇叭線（左+右）</div>
-            <div class="line"></div>
+      <div class="branch-row" style="margin-top:4px;">
+        <div class="branch-col">
+          <div class="conn">
+            <span class="conn-label label-hdmi">&#128246; HDMI</span>
+            <div class="conn-pipe pipe-hdmi"></div>
+            <span class="conn-arrow" style="color:#3498db;">&#9660;</span>
           </div>
-          <div class="wire-box speaker">&#128266; ALR 落地喇叭<br><span style="font-size:14px; font-weight:normal;">左邊一支、右邊一支<br>人聲和伴奏從這裡出來</span></div>
+          <div class="dev-box dev-tv" style="max-width:240px;">
+            <span class="dev-icon">&#128250;</span>
+            <div class="dev-name">電視</div>
+            <div class="dev-desc">顯示歌詞畫面</div>
+          </div>
         </div>
-        <div>
-          <div class="wire-arrow">
-            <div class="label">&#128225; 無線發射器（插在 SUB OUT）</div>
-            <div class="line"></div>
+        <div class="branch-col">
+          <div class="conn">
+            <span class="conn-label label-rca">&#127909; RCA 紅白線</span>
+            <div class="conn-pipe pipe-rca"></div>
+            <span class="conn-arrow" style="color:#e74c3c;">&#9660;</span>
           </div>
-          <div style="text-align:center; font-size:14px; color:#aaa; margin:4px 0;">~ ~ ~ 無線 ~ ~ ~</div>
-          <div class="wire-box sub">&#128165; R-10SWi 重低音<br><span style="font-size:14px; font-weight:normal;">放角落，插電就好<br>低音震撼感從這裡來</span></div>
+          <div style="font-size:13px; color:rgba(255,255,255,0.4); text-align:center;">音樂聲音往下送</div>
         </div>
       </div>
-
+      <div class="side-input-row" style="margin-top:14px;">
+        <div class="dev-box dev-mic" style="max-width:220px;">
+          <span class="dev-icon">&#127908;</span>
+          <div class="dev-name">無線麥克風 x2</div>
+          <div class="dev-desc">唱歌用，接收器輸出</div>
+        </div>
+        <div class="side-conn">
+          <span class="conn-label label-63mm">&#127926; 6.3mm</span>
+          <div class="conn-pipe-h pipe-63mm"></div>
+          <span class="side-arrow">&#9654;</span>
+        </div>
+        <div class="dev-box dev-mixer" style="max-width:280px;">
+          <span class="dev-icon">&#127911;</span>
+          <div class="dev-name">FIESTA KARASTAR 混音器</div>
+          <div class="dev-desc">音樂 + 人聲 + 迴音<br>全部在這裡混合</div>
+        </div>
+      </div>
+      <div class="diagram-row-center" style="margin-top:4px;">
+        <div class="conn">
+          <span class="conn-label label-rca">&#127909; RCA 紅白線（混合後的聲音）</span>
+          <div class="conn-pipe pipe-rca"></div>
+          <span class="conn-arrow" style="color:#e74c3c;">&#9660;</span>
+        </div>
+      </div>
+      <div class="diagram-row-center">
+        <div class="dev-box dev-amp" style="max-width:380px;">
+          <span class="dev-icon">&#127932;</span>
+          <div class="dev-name">Integra DTR-30.4 擴大機</div>
+          <div class="dev-desc">把混好的聲音放大，推動喇叭發聲</div>
+        </div>
+      </div>
+      <div class="output-row" style="margin-top:4px;">
+        <div class="output-col">
+          <div class="conn">
+            <span class="conn-label label-spk">&#128268; 喇叭線 (左+右)</span>
+            <div class="conn-pipe pipe-spk"></div>
+            <span class="conn-arrow" style="color:#ff6b4a;">&#9660;</span>
+          </div>
+          <div class="dev-box dev-speaker" style="max-width:260px;">
+            <span class="dev-icon">&#128266;</span>
+            <div class="dev-name">ALR Nummer 3 落地喇叭</div>
+            <div class="dev-desc">左右各一支<br>人聲和伴奏從這裡出來</div>
+          </div>
+        </div>
+        <div class="output-col">
+          <div class="conn">
+            <span class="conn-label label-wireless">&#128225; SUB OUT 無線發射</span>
+            <div class="conn-pipe pipe-wireless"></div>
+            <span class="conn-arrow" style="color:#9b59b6;">&#9660;</span>
+          </div>
+          <div class="wireless-waves">~ ~ ~ &#128752; 無線連接 ~ ~ ~</div>
+          <div class="dev-box dev-sub" style="max-width:260px;">
+            <span class="dev-icon">&#128165;</span>
+            <div class="dev-name">Klipsch R-10SWi 重低音</div>
+            <div class="dev-desc">放角落，插電就好<br>低音震撼感從這裡來</div>
+          </div>
+        </div>
+      </div>
+      <div class="wire-legend">
+        <h4>&#128209; 圖例說明</h4>
+        <div class="legend-section-title">設備類型</div>
+        <div class="legend-grid">
+          <div class="legend-item"><span class="legend-swatch" style="background:rgba(46,204,113,0.2); border-color:#2ecc71;"></span><span style="color:#5dfc8a;">音源設備</span></div>
+          <div class="legend-item"><span class="legend-swatch" style="background:rgba(26,188,156,0.2); border-color:#1abc9c;"></span><span style="color:#5ce8c6;">麥克風</span></div>
+          <div class="legend-item"><span class="legend-swatch" style="background:rgba(243,156,18,0.2); border-color:#f39c12;"></span><span style="color:#ffc048;">混音器</span></div>
+          <div class="legend-item"><span class="legend-swatch" style="background:rgba(233,69,96,0.2); border-color:#e94560;"></span><span style="color:#ff7b93;">擴大機</span></div>
+          <div class="legend-item"><span class="legend-swatch" style="background:rgba(52,152,219,0.2); border-color:#3498db;"></span><span style="color:#6ec6ff;">電視</span></div>
+          <div class="legend-item"><span class="legend-swatch" style="background:rgba(255,107,74,0.2); border-color:#ff6b4a;"></span><span style="color:#ff9a85;">喇叭</span></div>
+          <div class="legend-item"><span class="legend-swatch" style="background:rgba(155,89,182,0.2); border-color:#9b59b6;"></span><span style="color:#c89bdb;">重低音</span></div>
+        </div>
+        <div class="legend-section-title">線材類型</div>
+        <div class="legend-grid">
+          <div class="legend-cable"><span class="legend-line" style="background:#3498db;"></span><span style="color:#6ec6ff;">HDMI</span></div>
+          <div class="legend-cable"><span class="legend-line" style="background:#e74c3c;"></span><span style="color:#ff8a80;">RCA 紅白線</span></div>
+          <div class="legend-cable"><span class="legend-line" style="background:#1abc9c;"></span><span style="color:#5ce8c6;">6.3mm</span></div>
+          <div class="legend-cable"><span class="legend-line" style="background:#ff6b4a;"></span><span style="color:#ff9a85;">喇叭線</span></div>
+          <div class="legend-cable"><span class="legend-line" style="background:#9b59b6;"></span><span style="color:#c89bdb;">無線</span></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Section 4: Step by step -->
+  <!-- Section 4: Detailed Wiring Steps (IMPROVED) -->
   <div class="section">
     <h2><span class="num">4</span> 接線步驟（一步一步來）</h2>
-
-    <div class="step">
-      <h3><span class="step-num">1</span> 金嗓 → 電視</h3>
-      <p>用 <strong>HDMI 線</strong>，從金嗓的 HDMI OUT 接到電視的 HDMI 輸入。</p>
-      <p>&#8594; 開電視就能看到歌詞畫面。</p>
+    <div class="step-tip" style="margin-bottom: 24px; font-size: 20px;">
+      <strong>&#128161; 接線前請確認所有設備都是「關機」狀態！</strong><br>
+      所有線接好之後，才按照最後面的「開機順序」依序開機。
+    </div>
+    <!-- STEP 1 -->
+    <div class="wire-step-card">
+      <div class="step-header hdmi">
+        <div class="step-circle">1</div>
+        <div class="step-device-flow">
+          <span class="device-emoji">&#127916;</span><span>金嗓 CPX-900 <span class="badge-planned-inline">&#128722; 預計購買</span></span>
+          <span class="flow-arrow">&#10132;</span>
+          <span class="device-emoji">&#128250;</span><span>電視</span>
+        </div>
+      </div>
+      <div class="step-body">
+        <div class="cable-indicator cable-hdmi"><span class="cable-line"></span><span>HDMI 線（藍色扁扁的接頭）</span></div>
+        <div class="step-instruction">
+          從金嗓<strong>背面</strong>找到寫著 <strong>HDMI OUT</strong> 的孔，插上 HDMI 線的一頭。<br>
+          另一頭插到<strong>電視側面或背面</strong>的 <strong>HDMI 輸入</strong>孔（通常標示 HDMI 1、HDMI 2，都可以）。
+        </div>
+        <div class="mini-diagram">
+          <div class="mini-box src-karaoke"><span class="mini-emoji">&#127916;</span>金嗓 CPX-900<span class="mini-port">HDMI OUT</span></div>
+          <div class="mini-connector conn-hdmi"><span class="conn-label">HDMI 線</span><div class="conn-line"></div><span class="conn-arrow">&#10132;</span></div>
+          <div class="mini-box tgt-tv"><span class="mini-emoji">&#128250;</span>電視<span class="mini-port">HDMI 輸入</span></div>
+        </div>
+        <div class="step-result">&#10132; 接好後，電視就能顯示歌詞畫面！</div>
+        <div class="step-tip">&#128161; <strong>提醒</strong>：記得用電視遙控器把「輸入源」切換到你插的那個 HDMI 孔（例如 HDMI 1）。</div>
+      </div>
     </div>
 
-    <div class="step">
-      <h3><span class="step-num">2</span> 金嗓 → FIESTA 混音器</h3>
-      <p>用 <strong>RCA 紅白線</strong>，從金嗓背面的「音訊輸出」（紅+白孔）接到 FIESTA 的輸入孔。</p>
-      <p>&#8594; 音樂聲音送到混音器。</p>
-      <div class="tip">&#128161; 紅線接紅孔，白線接白孔，不要接反。</div>
+    <!-- STEP 2 -->
+    <div class="wire-step-card">
+      <div class="step-header rca">
+        <div class="step-circle">2</div>
+        <div class="step-device-flow">
+          <span class="device-emoji">&#127916;</span><span>金嗓 CPX-900 <span class="badge-planned-inline">&#128722; 預計購買</span></span>
+          <span class="flow-arrow">&#10132;</span>
+          <span class="device-emoji">&#127911;</span><span>FIESTA 混音器</span>
+        </div>
+      </div>
+      <div class="step-body">
+        <div class="cable-indicator cable-rca"><span class="cable-line"></span><span>RCA 紅白線（一紅一白兩個圓頭）</span></div>
+        <div class="step-instruction">
+          從金嗓<strong>背面</strong>找到 <strong>AUDIO OUT</strong>（音訊輸出），有<strong>紅色和白色</strong>兩個圓孔。<br>
+          用 RCA 紅白線，<strong>紅頭插紅孔、白頭插白孔</strong>。<br>
+          另一端同樣紅對紅、白對白，插到 FIESTA 混音器<strong>背面的音樂輸入孔</strong>。
+        </div>
+        <div class="mini-diagram">
+          <div class="mini-box src-karaoke"><span class="mini-emoji">&#127916;</span>金嗓 CPX-900<span class="mini-port">AUDIO OUT &#128308;&#9898;</span></div>
+          <div class="mini-connector conn-rca"><span class="conn-label">RCA 紅白線</span><div class="conn-line"></div><span class="conn-arrow">&#10132;</span></div>
+          <div class="mini-box tgt-mixer"><span class="mini-emoji">&#127911;</span>FIESTA 混音器<span class="mini-port">MUSIC IN &#128308;&#9898;</span></div>
+        </div>
+        <div class="step-result">&#10132; 音樂聲音就會送到混音器了！</div>
+        <div class="compare-box">
+          <div class="compare-item compare-correct"><span class="compare-label">&#9989; 正確</span>&#128308; 紅頭 &#8594; 紅孔<br>&#9898; 白頭 &#8594; 白孔</div>
+          <div class="compare-item compare-wrong"><span class="compare-label">&#10060; 錯誤</span>&#128308; 紅頭 &#8594; 白孔<br>&#9898; 白頭 &#8594; 紅孔<br>接反了！左右聲道會對調</div>
+        </div>
+      </div>
     </div>
 
-    <div class="step">
-      <h3><span class="step-num">3</span> 麥克風 → FIESTA 混音器</h3>
-      <p>兩支無線麥克風的接收器，用 <strong>6.3mm 線</strong>接到 FIESTA 的麥克風孔。</p>
-      <p>&#8594; 人聲送到混音器，跟音樂混在一起。</p>
+    <!-- STEP 3 -->
+    <div class="wire-step-card">
+      <div class="step-header jack63">
+        <div class="step-circle">3</div>
+        <div class="step-device-flow">
+          <span class="device-emoji">&#127908;</span><span>無線麥克風 x2</span>
+          <span class="flow-arrow">&#10132;</span>
+          <span class="device-emoji">&#127911;</span><span>FIESTA 混音器</span>
+        </div>
+      </div>
+      <div class="step-body">
+        <div class="cable-indicator cable-jack63"><span class="cable-line"></span><span>6.3mm 線（粗的耳機頭，比手機耳機頭大）</span></div>
+        <div class="step-instruction">
+          每支無線麥克風都有一個<strong>接收器</strong>（小方盒子）。<br>
+          用 <strong>6.3mm 線</strong>，把接收器的輸出孔接到 FIESTA <strong>正面</strong>的 <strong>MIC 1</strong> 和 <strong>MIC 2</strong> 孔。
+        </div>
+        <div class="mini-diagram">
+          <div class="mini-box src-mic"><span class="mini-emoji">&#127908;</span>麥克風接收器<span class="mini-port">OUTPUT</span></div>
+          <div class="mini-connector conn-jack63"><span class="conn-label">6.3mm</span><div class="conn-line"></div><span class="conn-arrow">&#10132;</span></div>
+          <div class="mini-box tgt-mixer"><span class="mini-emoji">&#127911;</span>FIESTA 混音器<span class="mini-port">MIC 1 | MIC 2</span></div>
+        </div>
+        <div class="step-result">&#10132; 唱歌的人聲就會進到混音器，和音樂混在一起！</div>
+        <div class="step-tip">&#128161; <strong>6.3mm 接頭長什麼樣？</strong>比手機耳機孔（3.5mm）大一倍，金屬圓柱頭，插到底會有「喀」一聲。</div>
+      </div>
     </div>
 
-    <div class="step">
-      <h3><span class="step-num">4</span> FIESTA 混音器 → Integra 擴大機</h3>
-      <p>用 <strong>RCA 紅白線</strong>，從 FIESTA 的輸出接到 Integra 背面的 <strong>AUX</strong> 或 <strong>CD</strong> 輸入孔。</p>
-      <p>&#8594; 混好的聲音（音樂+人聲+迴音）送到擴大機。</p>
+    <!-- STEP 4 -->
+    <div class="wire-step-card">
+      <div class="step-header rca">
+        <div class="step-circle">4</div>
+        <div class="step-device-flow">
+          <span class="device-emoji">&#127911;</span><span>FIESTA 混音器</span>
+          <span class="flow-arrow">&#10132;</span>
+          <span class="device-emoji">&#127932;</span><span>Integra 擴大機</span>
+        </div>
+      </div>
+      <div class="step-body">
+        <div class="cable-indicator cable-rca"><span class="cable-line"></span><span>RCA 紅白線（跟步驟 2 同一種線）</span></div>
+        <div class="step-instruction">
+          從 FIESTA 混音器<strong>背面</strong>找到 <strong>OUTPUT</strong>（輸出），一樣是紅+白兩個圓孔。<br>
+          用<strong>另一條</strong> RCA 紅白線，紅對紅、白對白。<br>
+          另一端接到 Integra 擴大機背面的 <strong>AUX</strong> 或 <strong>CD</strong> 輸入孔。
+        </div>
+        <div class="mini-diagram">
+          <div class="mini-box src-mixer"><span class="mini-emoji">&#127911;</span>FIESTA 混音器<span class="mini-port">OUTPUT &#128308;&#9898;</span></div>
+          <div class="mini-connector conn-rca"><span class="conn-label">RCA 紅白線</span><div class="conn-line"></div><span class="conn-arrow">&#10132;</span></div>
+          <div class="mini-box tgt-amp"><span class="mini-emoji">&#127932;</span>Integra 擴大機<span class="mini-port">AUX 或 CD 輸入 &#128308;&#9898;</span></div>
+        </div>
+        <div class="step-result">&#10132; 混好的聲音（音樂＋人聲＋迴音）送到擴大機放大！</div>
+        <div class="step-warn">&#9888;&#65039; <strong>注意</strong>：步驟 2 和步驟 4 都用 RCA 紅白線，但是是<strong>兩條不同的線</strong>，不要搞混。你總共需要<strong>兩條</strong> RCA 紅白線。</div>
+      </div>
     </div>
 
-    <div class="step">
-      <h3><span class="step-num">5</span> Integra → ALR 落地喇叭</h3>
-      <p>用<strong>喇叭線</strong>，從 Integra 背面的 <strong>FRONT L / R</strong> 接到兩支 ALR 落地喇叭。</p>
-      <p>&#8594; 聲音從喇叭出來了！</p>
-      <div class="warn">&#9888;&#65039; 注意正負極！紅線接紅（+），黑線接黑（-），兩支都要一樣。</div>
+    <!-- STEP 5 -->
+    <div class="wire-step-card">
+      <div class="step-header speaker">
+        <div class="step-circle">5</div>
+        <div class="step-device-flow">
+          <span class="device-emoji">&#127932;</span><span>Integra 擴大機</span>
+          <span class="flow-arrow">&#10132;</span>
+          <span class="device-emoji">&#128266;</span><span>ALR 落地喇叭</span>
+        </div>
+      </div>
+      <div class="step-body">
+        <div class="cable-indicator cable-speaker"><span class="cable-line"></span><span>喇叭線（裸銅線兩端鎖螺絲）</span></div>
+        <div class="step-instruction">
+          找到 Integra <strong>背面</strong>的 <strong>FRONT L</strong>（前方左聲道）和 <strong>FRONT R</strong>（前方右聲道）接線柱。<br>
+          每個聲道有 <strong>紅色（+）</strong> 和 <strong>黑色（-）</strong> 兩個接線柱。
+        </div>
+        <div class="mini-diagram">
+          <div class="mini-box src-amp"><span class="mini-emoji">&#127932;</span>Integra 擴大機<span class="mini-port">FRONT L &#128308;&#11035; | FRONT R &#128308;&#11035;</span></div>
+          <div class="mini-connector conn-speaker"><span class="conn-label">喇叭線 x2</span><div class="conn-line"></div><span class="conn-arrow">&#10132;</span></div>
+          <div class="mini-box tgt-speaker"><span class="mini-emoji">&#128266;</span>ALR 落地喇叭<span class="mini-port">左喇叭 &#128308;&#11035; | 右喇叭 &#128308;&#11035;</span></div>
+        </div>
+        <div class="step-result">&#10132; 聲音從喇叭出來了！左邊放一支、右邊放一支。</div>
+        <div class="step-danger">&#9888;&#65039; <strong>正負極很重要！接反會沒低音、聲音怪怪的。</strong></div>
+        <div style="text-align: center; font-size: 18px; font-weight: 700; color: #1a1a2e; margin: 16px 0 8px;">接線柱正負極對照：</div>
+        <div class="polarity-diagram">
+          <div class="polarity-terminal"><div class="terminal-block terminal-red">+</div><div class="polarity-wire wire-red-color"></div>紅色（+）正極</div>
+          <div style="font-size: 28px; font-weight: 900; color: #1a1a2e;">&#8596;</div>
+          <div class="polarity-terminal"><div class="terminal-block terminal-red">+</div><div class="polarity-wire wire-red-color"></div>紅色（+）正極</div>
+        </div>
+        <div class="polarity-diagram" style="margin-top: 8px;">
+          <div class="polarity-terminal"><div class="terminal-block terminal-blk">&minus;</div><div class="polarity-wire wire-blk-color"></div>黑色（-）負極</div>
+          <div style="font-size: 28px; font-weight: 900; color: #1a1a2e;">&#8596;</div>
+          <div class="polarity-terminal"><div class="terminal-block terminal-blk">&minus;</div><div class="polarity-wire wire-blk-color"></div>黑色（-）負極</div>
+        </div>
+        <div style="text-align: center; font-size: 14px; color: #888; margin: 4px 0 12px;">&#8593; 擴大機這邊 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#8593; 喇叭那邊</div>
+        <div class="compare-box">
+          <div class="compare-item compare-correct"><span class="compare-label">&#9989; 正確</span>擴大機 <strong>紅（+）&#8594; 喇叭 紅（+）</strong><br>擴大機 <strong>黑（-）&#8594; 喇叭 黑（-）</strong><br><strong>兩支喇叭都一樣接法</strong></div>
+          <div class="compare-item compare-wrong"><span class="compare-label">&#10060; 錯誤</span>擴大機 紅（+）&#8594; 喇叭 <strong>黑（-）</strong><br>接反了！聲音會變空洞、低音消失</div>
+        </div>
+        <div class="step-tip">&#128161; <strong>小技巧</strong>：接線柱旋鈕往左轉鬆開，把銅線插進去，再往右轉鎖緊。不需要工具，用手轉就好。</div>
+      </div>
     </div>
 
-    <div class="step">
-      <h3><span class="step-num">6</span> 重低音（最簡單）</h3>
-      <p>把 R-10SWi 附的小小<strong>無線發射器</strong>，插到 Integra 背面的 <strong>SUB OUT</strong> 孔。</p>
-      <p>R-10SWi 重低音喇叭放在<strong>客廳角落</strong>，<strong>插電</strong>就好。</p>
-      <p>&#8594; 自動無線連接，低音就有了！</p>
+    <!-- STEP 6 -->
+    <div class="wire-step-card">
+      <div class="step-header wireless">
+        <div class="step-circle">6</div>
+        <div class="step-device-flow">
+          <span class="device-emoji">&#127932;</span><span>Integra 擴大機</span>
+          <span class="flow-arrow">~ ~ ~</span>
+          <span class="device-emoji">&#128165;</span><span>R-10SWi 重低音</span>
+        </div>
+      </div>
+      <div class="step-body">
+        <div class="cable-indicator cable-wireless"><span class="cable-line"></span><span>無線（不需要拉線！最簡單的一步）</span></div>
+        <div class="step-instruction">
+          <strong>只要做兩件事：</strong><br>
+          &#10102; 把 R-10SWi <strong>附的小小無線發射器</strong>（像隨身碟大小），插到 Integra 背面的 <strong>SUB OUT</strong> 孔。<br>
+          &#10103; R-10SWi 重低音喇叭放在<strong>客廳角落</strong>，把<strong>電源線插上插座</strong>。
+        </div>
+        <div class="mini-diagram">
+          <div class="mini-box src-amp-sub"><span class="mini-emoji">&#127932;</span>Integra 擴大機<span class="mini-port">SUB OUT &#8592; 插入發射器</span></div>
+          <div class="mini-connector conn-wireless"><span class="conn-label">~ 無線 ~</span><div class="conn-line"></div><span class="conn-arrow">&#10132;</span></div>
+          <div class="mini-box tgt-sub"><span class="mini-emoji">&#128165;</span>R-10SWi 重低音<span class="mini-port">插電即可 &#9889;</span></div>
+        </div>
+        <div class="step-result">&#10132; 自動無線配對，低音震撼感就有了！</div>
+        <div class="step-tip">&#128161; 不需要設定任何東西。發射器和重低音喇叭出廠已經配對好了，插上就會自動連線。</div>
+      </div>
+    </div>
+
+    <!-- POWER ON/OFF SEQUENCE -->
+    <div class="power-card">
+      <div class="power-header">
+        <div class="step-circle">&#9889;</div>
+        <span>&#128268; 開機 / 關機順序（很重要！）</span>
+      </div>
+      <div class="power-body">
+        <div style="margin-bottom: 24px;">
+          <div class="power-subtitle on">&#128994; 開機順序（從前端到後端）</div>
+          <p style="font-size: 18px; color: #555; margin-bottom: 10px;">先開「播放畫面的」，最後開「發出聲音的」：</p>
+          <div class="power-sequence">
+            <div class="power-item"><span class="power-num">1</span><span class="power-emoji">&#128250;</span><span class="power-label">電視</span></div>
+            <span class="power-arrow">&#10132;</span>
+            <div class="power-item"><span class="power-num">2</span><span class="power-emoji">&#127916;</span><span class="power-label">金嗓點歌機</span></div>
+            <span class="power-arrow">&#10132;</span>
+            <div class="power-item"><span class="power-num">3</span><span class="power-emoji">&#127911;</span><span class="power-label">FIESTA<br>混音器</span></div>
+            <span class="power-arrow">&#10132;</span>
+            <div class="power-item"><span class="power-num">4</span><span class="power-emoji">&#127932;</span><span class="power-label">Integra<br>擴大機</span></div>
+            <span class="power-arrow">&#10132;</span>
+            <div class="power-item"><span class="power-num">5</span><span class="power-emoji">&#128165;</span><span class="power-label">重低音</span></div>
+          </div>
+        </div>
+        <hr style="border: none; border-top: 2px dashed #ddd; margin: 20px 0;">
+        <div>
+          <div class="power-subtitle off">&#128308; 關機順序（反過來！）</div>
+          <p style="font-size: 18px; color: #555; margin-bottom: 10px;">先關「發出聲音的」，最後關「播放畫面的」：</p>
+          <div class="power-sequence">
+            <div class="power-item"><span class="power-num">1</span><span class="power-emoji">&#128165;</span><span class="power-label">重低音</span></div>
+            <span class="power-arrow">&#10132;</span>
+            <div class="power-item"><span class="power-num">2</span><span class="power-emoji">&#127932;</span><span class="power-label">Integra<br>擴大機</span></div>
+            <span class="power-arrow">&#10132;</span>
+            <div class="power-item"><span class="power-num">3</span><span class="power-emoji">&#127911;</span><span class="power-label">FIESTA<br>混音器</span></div>
+            <span class="power-arrow">&#10132;</span>
+            <div class="power-item"><span class="power-num">4</span><span class="power-emoji">&#127916;</span><span class="power-label">金嗓點歌機</span></div>
+            <span class="power-arrow">&#10132;</span>
+            <div class="power-item"><span class="power-num">5</span><span class="power-emoji">&#128250;</span><span class="power-label">電視</span></div>
+          </div>
+        </div>
+        <div class="step-danger" style="margin-top: 18px;">
+          &#9888;&#65039; <strong>為什麼順序重要？</strong><br>
+          如果擴大機開著的時候突然插拔線或開關前面設備，喇叭可能會發出很大的「砰！」聲，<strong>會傷害喇叭</strong>。<br>
+          所以：<strong>擴大機最後開、最先關</strong>，就對了！
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Section 5: Integra settings -->
   <div class="section">
     <h2><span class="num">5</span> Integra 擴大機設定</h2>
-
     <p>用 Integra 的遙控器，進入設定選單：</p>
-
     <table>
       <tr><th>設定</th><th>選什麼</th><th>意思</th></tr>
       <tr><td><strong>輸入來源</strong></td><td>選 <strong>AUX</strong> 或 <strong>CD</strong></td><td>就是你接混音器那個孔</td></tr>
       <tr><td><strong>Front Speaker</strong></td><td><strong>Large</strong></td><td>讓落地喇叭全力發聲</td></tr>
       <tr><td><strong>Subwoofer</strong></td><td><strong>Yes</strong></td><td>開啟重低音</td></tr>
     </table>
-
     <div class="tip">&#128161; 如果聽起來聲音怪怪的，可以跑一次 <strong>Audyssey 自動校正</strong>（遙控器按 Audyssey Setup），它會自動調整所有聲音。</div>
   </div>
 
   <!-- Section 6: Volume tips -->
   <div class="section">
     <h2><span class="num">6</span> 唱歌時的音量控制</h2>
-
     <table>
       <tr><th>旋鈕/音量</th><th>建議位置</th><th>為什麼</th></tr>
       <tr><td><strong>Integra 主音量</strong></td><td>50-60%</td><td>不要開太大，保護喇叭</td></tr>
@@ -378,7 +809,6 @@ th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
       <tr><td><strong>FIESTA 迴音（Echo）</strong></td><td>30-40%</td><td>太多會糊掉，太少像在說話</td></tr>
       <tr><td><strong>重低音 Volume</strong></td><td>50%（12 點鐘）</td><td>低音的大小聲</td></tr>
     </table>
-
     <div class="warn">
       <strong>&#9888;&#65039; 最重要的一件事！</strong><br>
       如果聽到「嗶～～～」的尖叫聲（麥克風回授），<strong>馬上把麥克風音量關小</strong>或把麥克風移開喇叭。<br>
@@ -389,25 +819,21 @@ th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
   <!-- Section 7: Shopping list -->
   <div class="section">
     <h2><span class="num">7</span> 需要買的線材</h2>
-
     <table>
       <tr><th>買什麼</th><th>接哪裡</th><th>大約多少錢</th></tr>
-      <tr><td>&#128268; RCA 紅白線 x2 條</td><td>金嗓→混音器、混音器→擴大機</td><td>NT$100-200/條</td></tr>
-      <tr><td>&#128268; 喇叭線 x2 條（各 2-3 米）</td><td>擴大機→左喇叭、擴大機→右喇叭</td><td>NT$200-500/條</td></tr>
-      <tr><td>&#128268; HDMI 線 x1 條</td><td>金嗓→電視</td><td>NT$200-400</td></tr>
+      <tr><td>&#128268; RCA 紅白線 x2 條</td><td>金嗓&#8594;混音器、混音器&#8594;擴大機</td><td>NT$100-200/條</td></tr>
+      <tr><td>&#128268; 喇叭線 x2 條（各 2-3 米）</td><td>擴大機&#8594;左喇叭、擴大機&#8594;右喇叭</td><td>NT$200-500/條</td></tr>
+      <tr><td>&#128268; HDMI 線 x1 條</td><td>金嗓&#8594;電視</td><td>NT$200-400</td></tr>
     </table>
-
     <div class="tip">
       &#128161; <strong>重低音不用買線！</strong>R-10SWi 是無線的，只需要把附的小發射器插到擴大機就好。
     </div>
-
     <p style="margin-top:16px; font-size:17px; color:#7f8c8d;">全部線材加起來大約 <strong>NT$600-1,500</strong>，蝦皮或光華商場都買得到。</p>
   </div>
 
   <!-- Section 8: Quick troubleshooting -->
   <div class="section">
     <h2><span class="num">8</span> 常見問題</h2>
-
     <div class="step" style="border-left-color: #e94560;">
       <h3>&#10060; 沒有聲音</h3>
       <ul>
@@ -417,7 +843,6 @@ th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
         <li>Integra 音量是不是轉到最小了？</li>
       </ul>
     </div>
-
     <div class="step" style="border-left-color: #f39c12;">
       <h3>&#10060; 有音樂但沒有麥克風聲音</h3>
       <ul>
@@ -426,7 +851,6 @@ th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
         <li>FIESTA 的麥克風音量有沒有開？</li>
       </ul>
     </div>
-
     <div class="step" style="border-left-color: #9b59b6;">
       <h3>&#10060; 沒有低音震撼感</h3>
       <ul>
@@ -436,7 +860,6 @@ th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
         <li>Integra 設定裡 Subwoofer 是不是 Yes？</li>
       </ul>
     </div>
-
     <div class="step" style="border-left-color: #e94560;">
       <h3>&#10060; 嗶～～ 尖叫聲（回授）</h3>
       <ul>
