@@ -361,6 +361,140 @@ th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
   .polarity-diagram { gap: 16px; }
   .badge-planned { font-size: 11px; top: -10px; right: -4px; }
 }
+
+/* ========== FIESTA TUTORIAL SECTION ========== */
+.fiesta-panel {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 14px;
+  padding: 24px;
+  margin: 18px 0;
+  color: #e0e0e0;
+}
+.fiesta-panel h3 {
+  color: #ff6b35;
+  margin: 0 0 14px;
+  font-size: 21px;
+}
+.fiesta-remote {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+.remote-btn {
+  background: #2a2a4a;
+  border: 2px solid #3a3a5a;
+  border-radius: 12px;
+  padding: 14px 10px;
+  text-align: center;
+  transition: all 0.3s;
+  cursor: default;
+}
+.remote-btn:hover { border-color: #ff6b35; transform: translateY(-2px); }
+.remote-btn .btn-label {
+  font-size: 15px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+.remote-btn .btn-desc {
+  font-size: 13px;
+  color: #999;
+  line-height: 1.5;
+}
+.remote-btn.recommended {
+  border-color: #ff6b35;
+  background: linear-gradient(135deg, #2a1a0a 0%, #2a2a4a 100%);
+  box-shadow: 0 0 12px rgba(255,107,53,0.25);
+}
+.remote-btn.recommended .btn-label { color: #ff6b35; }
+.mode-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-top: 6px;
+}
+.mode-tag.best { background: #ff6b35; color: #fff; }
+.mode-tag.good { background: #27ae60; color: #fff; }
+.mode-tag.ok { background: #3498db; color: #fff; }
+.mode-tag.skip { background: #555; color: #aaa; }
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin: 14px 0;
+}
+.scenario-card {
+  background: #f8f9ff;
+  border-radius: 12px;
+  padding: 18px;
+  border-top: 4px solid #0f3460;
+}
+.scenario-card h4 { font-size: 18px; color: #1a1a2e; margin-bottom: 8px; }
+.scenario-card .sc-icon { font-size: 32px; display: block; margin-bottom: 6px; }
+.scenario-card ul { padding-left: 20px; margin: 0; }
+.scenario-card li { font-size: 15px; color: #555; line-height: 1.7; }
+.scenario-card.sc-ballad { border-top-color: #e94560; }
+.scenario-card.sc-upbeat { border-top-color: #ff6b35; }
+.scenario-card.sc-movie { border-top-color: #3498db; }
+.scenario-card.sc-night { border-top-color: #9b59b6; }
+.key-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 14px 0;
+  flex-wrap: wrap;
+}
+.key-block {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+.key-block.neg { background: #3498db; }
+.key-block.zero { background: #2ecc71; width: 44px; font-size: 16px; }
+.key-block.pos { background: #e94560; }
+.key-divider { font-size: 13px; color: #999; padding: 0 2px; }
+.avc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 14px 0;
+}
+.avc-card {
+  background: #2a2a4a;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  border: 2px solid #3a3a5a;
+}
+.avc-card.avc-rec { border-color: #27ae60; }
+.avc-card .avc-name { font-size: 18px; font-weight: 700; display: block; color: #fff; }
+.avc-card .avc-desc { font-size: 13px; color: #999; margin-top: 6px; display: block; line-height: 1.5; }
+.fiesta-quickstart {
+  background: #e8f5e9;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 18px 0;
+}
+.fiesta-quickstart h3 { color: #2e7d32; margin: 0 0 12px; }
+.fiesta-quickstart ol { padding-left: 24px; }
+.fiesta-quickstart li { font-size: 17px; color: #333; line-height: 2; }
+.fiesta-quickstart li strong { color: #e94560; }
+@media (max-width: 600px) {
+  .fiesta-remote { grid-template-columns: 1fr 1fr; }
+  .scenario-grid { grid-template-columns: 1fr; }
+  .avc-grid { grid-template-columns: 1fr; }
+  .key-block { width: 28px; height: 28px; font-size: 12px; }
+  .key-block.zero { width: 36px; }
+}
 </style>
 </head>
 <body>
@@ -868,6 +1002,201 @@ th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
         <li>人站在喇叭前面唱，不要站在旁邊</li>
         <li>確認 FIESTA 的「防嘯叫」功能有開</li>
       </ul>
+    </div>
+  </div>
+
+
+  <!-- Section 9: FIESTA mixer tutorial -->
+  <div class="section">
+    <h2><span class="num">9</span> FIESTA 混音器調整教學</h2>
+    <p style="font-size:17px; color:#7f8c8d; margin-bottom:18px;">
+      FIESTA KARASTAR 用遙控器就能操作所有功能，以下教你每個模式怎麼選。
+    </p>
+
+    <!-- 9A: Reverb modes -->
+    <h3>&#127908; 麥克風混響模式（迴音效果）</h3>
+    <p>用遙控器的 <strong>REVERB</strong> 按鈕切換，共 5 種模式：</p>
+
+    <div class="fiesta-panel">
+      <h3>5 種混響模式一覽</h3>
+      <div class="fiesta-remote">
+        <div class="remote-btn recommended">
+          <span class="btn-label">KTV</span>
+          <span class="btn-desc">模擬 KTV 包廂的迴音感，最自然好唱</span>
+          <span class="mode-tag best">&#11088; 台語老歌首選</span>
+        </div>
+        <div class="remote-btn recommended">
+          <span class="btn-label">PRO</span>
+          <span class="btn-desc">專業錄音室風格，迴音乾淨、人聲清晰</span>
+          <span class="mode-tag good">&#9989; 咬字清楚</span>
+        </div>
+        <div class="remote-btn">
+          <span class="btn-label">STAGE</span>
+          <span class="btn-desc">舞台演唱風格，迴音較長、空間感大</span>
+          <span class="mode-tag ok">適合慢歌抒情</span>
+        </div>
+        <div class="remote-btn">
+          <span class="btn-label">SUPER</span>
+          <span class="btn-desc">迴音效果最強，像在大廳唱歌</span>
+          <span class="mode-tag ok">效果最誇張</span>
+        </div>
+        <div class="remote-btn">
+          <span class="btn-label">BYPASS</span>
+          <span class="btn-desc">完全不加迴音，原始乾聲</span>
+          <span class="mode-tag skip">不建議唱歌用</span>
+        </div>
+      </div>
+      <div class="tip" style="background:rgba(39,174,96,0.15); color:#e0e0e0;">
+        &#128161; <strong>建議：</strong>爸平常唱台語老歌就用 <strong style="color:#ff6b35;">KTV 模式</strong>，聽起來最像在 KTV 唱歌的感覺。想要咬字更清楚就切 <strong style="color:#ff6b35;">PRO</strong>。
+      </div>
+    </div>
+
+    <!-- 9B: EQ modes -->
+    <h3>&#127911; EQ 音場模式（聲音風格）</h3>
+    <p>用遙控器的 <strong>EQ</strong> 按鈕切換，共 6 種模式：</p>
+
+    <div class="fiesta-panel">
+      <h3>6 種 EQ 音場模式</h3>
+      <div class="fiesta-remote">
+        <div class="remote-btn recommended">
+          <span class="btn-label">&#127908; 唱歌</span>
+          <span class="btn-desc">人聲突出，帶迴音感，專為唱歌設計</span>
+          <span class="mode-tag best">&#11088; 唱歌必選</span>
+        </div>
+        <div class="remote-btn recommended">
+          <span class="btn-label">&#127925; 音樂</span>
+          <span class="btn-desc">均衡音場，適合純聽音樂</span>
+          <span class="mode-tag good">&#9989; 聽歌用</span>
+        </div>
+        <div class="remote-btn">
+          <span class="btn-label">&#127916; 電影</span>
+          <span class="btn-desc">低頻加強，看電影更有氣勢震撼</span>
+          <span class="mode-tag ok">看電影用</span>
+        </div>
+        <div class="remote-btn">
+          <span class="btn-label">&#127771; 夜間</span>
+          <span class="btn-desc">降低中低頻，晚上不吵到鄰居</span>
+          <span class="mode-tag ok">晚上看電視</span>
+        </div>
+        <div class="remote-btn">
+          <span class="btn-label">&#9889; 電音</span>
+          <span class="btn-desc">動態拉大，中低頻節奏加強</span>
+          <span class="mode-tag skip">跳舞音樂用</span>
+        </div>
+        <div class="remote-btn">
+          <span class="btn-label">&#10145; 直通</span>
+          <span class="btn-desc">不做任何處理，原始聲音直接輸出</span>
+          <span class="mode-tag skip">測試用</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9C: Key shift -->
+    <h3>&#127929; 升降 Key（調整音調高低）</h3>
+    <p>歌太高唱不上去？太低不好唱？用遙控器的 <strong>KEY &#9650;/&#9660;</strong> 按鈕調整！</p>
+    <p style="text-align:center; margin:10px 0; color:#7f8c8d; font-size:16px;">&#9664; 降低音調 ─────── 原調 ─────── 升高音調 &#9654;</p>
+    <div class="key-visual">
+      <div class="key-block neg">-7</div>
+      <div class="key-block neg">-6</div>
+      <div class="key-block neg">-5</div>
+      <div class="key-block neg">-4</div>
+      <div class="key-block neg">-3</div>
+      <div class="key-block neg">-2</div>
+      <div class="key-block neg">-1</div>
+      <div class="key-block zero">0</div>
+      <div class="key-block pos">+1</div>
+      <div class="key-block pos">+2</div>
+      <div class="key-block pos">+3</div>
+      <div class="key-block pos">+4</div>
+      <div class="key-block pos">+5</div>
+      <div class="key-block pos">+6</div>
+      <div class="key-block pos">+7</div>
+    </div>
+    <div class="tip">
+      &#128161; <strong>小訣竅：</strong>台語老歌原調唱不上去的話，通常降 <strong>2~3 個 Key</strong> 就會好唱很多。按遙控器 KEY &#9660; 兩三下就好。唱完記得按回 0（原調）。
+    </div>
+
+    <!-- 9D: AVC voice cancel -->
+    <h3>&#127916; AVC 人聲消除（去人聲功能）</h3>
+    <p>用遙控器的 <strong>AVC</strong> 按鈕切換，可以把 YouTube MV 的原唱消掉：</p>
+
+    <div class="fiesta-panel">
+      <h3>3 種人聲消除模式</h3>
+      <div class="avc-grid">
+        <div class="avc-card avc-rec">
+          <span class="avc-name">AUTO</span>
+          <span class="avc-desc">拿起麥克風唱 &#8594; 自動消人聲<br>放下麥克風 &#8594; 恢復原唱<br><strong style="color:#27ae60;">&#11088; 最方便！</strong></span>
+        </div>
+        <div class="avc-card">
+          <span class="avc-name">ON</span>
+          <span class="avc-desc">強制消除人聲<br>不管有沒有唱<br>都會消掉原唱</span>
+        </div>
+        <div class="avc-card">
+          <span class="avc-name">OFF</span>
+          <span class="avc-desc">關閉消除功能<br>聽原唱正常播放<br>不唱歌時用這個</span>
+        </div>
+      </div>
+      <div class="tip" style="background:rgba(39,174,96,0.15); color:#e0e0e0;">
+        &#128161; <strong>建議：</strong>平常設 <strong style="color:#27ae60;">AUTO</strong> 就好！拿起麥克風唱歌時自動消人聲，放下麥克風就恢復原唱，不用一直切來切去。
+      </div>
+    </div>
+
+    <!-- 9E: Scenario recommendations -->
+    <h3>&#127775; 不同場景的推薦組合</h3>
+    <div class="scenario-grid">
+      <div class="scenario-card sc-ballad">
+        <span class="sc-icon">&#127908;</span>
+        <h4>唱台語老歌</h4>
+        <ul>
+          <li>混響：<strong>KTV</strong></li>
+          <li>EQ：<strong>唱歌</strong></li>
+          <li>AVC：<strong>AUTO</strong></li>
+          <li>Key：看個人調整</li>
+        </ul>
+      </div>
+      <div class="scenario-card sc-upbeat">
+        <span class="sc-icon">&#127926;</span>
+        <h4>唱國語流行歌</h4>
+        <ul>
+          <li>混響：<strong>PRO</strong></li>
+          <li>EQ：<strong>唱歌</strong></li>
+          <li>AVC：<strong>AUTO</strong></li>
+          <li>Key：看個人調整</li>
+        </ul>
+      </div>
+      <div class="scenario-card sc-movie">
+        <span class="sc-icon">&#127916;</span>
+        <h4>看電影</h4>
+        <ul>
+          <li>混響：<strong>BYPASS</strong></li>
+          <li>EQ：<strong>電影</strong></li>
+          <li>AVC：<strong>OFF</strong></li>
+          <li>Key：0（原調）</li>
+        </ul>
+      </div>
+      <div class="scenario-card sc-night">
+        <span class="sc-icon">&#127771;</span>
+        <h4>晚上看電視</h4>
+        <ul>
+          <li>混響：<strong>BYPASS</strong></li>
+          <li>EQ：<strong>夜間</strong></li>
+          <li>AVC：<strong>OFF</strong></li>
+          <li>Key：0（原調）</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Quick start summary -->
+    <div class="fiesta-quickstart">
+      <h3>&#128640; 爸你只要記這個！</h3>
+      <ol>
+        <li>拿起遙控器，按 <strong>REVERB</strong> 切到 <strong>KTV</strong></li>
+        <li>按 <strong>EQ</strong> 切到 <strong>唱歌</strong></li>
+        <li>按 <strong>AVC</strong> 切到 <strong>AUTO</strong></li>
+        <li>打開 YouTube 找歌，拿起麥克風就唱！</li>
+        <li>唱不上去就按 <strong>KEY &#9660;</strong> 降 2~3 下</li>
+        <li>唱完記得按 <strong>KEY</strong> 回到 <strong>0</strong></li>
+      </ol>
     </div>
   </div>
 
