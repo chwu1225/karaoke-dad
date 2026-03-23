@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>爸的卡拉OK 接線教學</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  font-size: 20px;
+  line-height: 1.9;
+  color: #2c3e50;
+  background: #f5f6fa;
+}
+.hero {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #fff;
+  text-align: center;
+  padding: 50px 24px 40px;
+}
+.hero h1 { font-size: clamp(28px, 7vw, 44px); font-weight: 800; }
+.hero h1 span { color: #e94560; }
+.hero p { font-size: clamp(18px, 4vw, 24px); opacity: 0.85; margin-top: 8px; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 20px 60px; }
+.section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 28px;
+  margin-top: 28px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+h2 {
+  font-size: clamp(22px, 5vw, 30px);
+  color: #1a1a2e;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #e94560;
+}
+h3 { font-size: 22px; color: #0f3460; margin: 24px 0 12px; }
+.num {
+  display: inline-block;
+  background: #e94560;
+  color: #fff;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 36px;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+/* Equipment cards */
+.equip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 16px 0; }
+.equip-card {
+  background: #f8f9ff;
+  border-radius: 12px;
+  padding: 18px;
+  border-left: 4px solid #0f3460;
+  text-align: center;
+}
+.equip-card .icon { font-size: 40px; display: block; margin-bottom: 6px; }
+.equip-card h4 { font-size: 18px; color: #1a1a2e; }
+.equip-card p { font-size: 15px; color: #7f8c8d; margin-top: 4px; }
+.equip-card.main { border-left-color: #e94560; background: #fff5f5; }
+.equip-card.highlight { border-left-color: #ff6b35; background: #fff8f0; }
+
+/* Wiring diagram */
+.wiring {
+  background: #1a1a2e;
+  border-radius: 16px;
+  padding: 32px 20px;
+  color: #fff;
+  margin: 20px 0;
+}
+.wire-box {
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.wire-box.source { border-color: #2ecc71; background: rgba(46,204,113,0.15); }
+.wire-box.mixer { border-color: #f39c12; background: rgba(243,156,18,0.15); }
+.wire-box.amp { border-color: #e94560; background: rgba(233,69,96,0.15); }
+.wire-box.tv { border-color: #3498db; background: rgba(52,152,219,0.15); }
+.wire-box.speaker { border-color: #ff6b35; background: rgba(255,107,53,0.15); }
+.wire-box.sub { border-color: #9b59b6; background: rgba(155,89,182,0.15); }
+.wire-box.mic { border-color: #1abc9c; background: rgba(26,188,156,0.15); }
+.wire-arrow {
+  text-align: center;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #bbb;
+}
+.wire-arrow .line { width: 3px; height: 24px; background: #888; margin: 0 auto; }
+.wire-arrow .label { margin-bottom: 4px; font-size: 15px; }
+.wire-split {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.wire-split > div { flex: 1; min-width: 180px; max-width: 240px; text-align: center; }
+.wire-side { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 12px 0; }
+
+/* Steps */
+.step {
+  background: #f0f7ff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 16px 0;
+  border-left: 4px solid #0f3460;
+}
+.step-num {
+  display: inline-block;
+  background: #0f3460;
+  color: #fff;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 32px;
+  font-weight: bold;
+  margin-right: 8px;
+}
+.tip {
+  background: #e8f5e9;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 12px 0;
+  font-size: 17px;
+}
+.warn {
+  background: #fff3e0;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 12px 0;
+  font-size: 17px;
+}
+table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #eee; font-size: 17px; }
+th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
+.footer {
+  text-align: center;
+  padding: 30px;
+  color: #7f8c8d;
+  font-size: 16px;
+}
+@media (max-width: 600px) {
+  .section { padding: 24px 18px; }
+  .wiring { padding: 24px 14px; }
+  .wire-box { font-size: 16px; padding: 12px; }
+  th, td { padding: 10px 8px; font-size: 15px; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>&#127908; 爸的<span>卡拉OK</span></h1>
+  <p>照這個接就對了！</p>
+</header>
+
+<div class="container">
+
+  <!-- Section 1: Equipment overview -->
+  <div class="section">
+    <h2><span class="num">1</span> 我們家有這些設備</h2>
+    <div class="equip-grid">
+      <div class="equip-card main">
+        <span class="icon">&#127916;</span>
+        <h4>金嗓 CPX-900</h4>
+        <p>點歌機（播放音樂和歌詞）</p>
+      </div>
+      <div class="equip-card highlight">
+        <span class="icon">&#127911;</span>
+        <h4>FIESTA 混音器</h4>
+        <p>把音樂和麥克風混在一起</p>
+      </div>
+      <div class="equip-card">
+        <span class="icon">&#127932;</span>
+        <h4>Integra DTR-30.4</h4>
+        <p>擴大機（把聲音放大）</p>
+      </div>
+      <div class="equip-card">
+        <span class="icon">&#128266;</span>
+        <h4>ALR Nummer 3</h4>
+        <p>落地喇叭（左邊+右邊）</p>
+      </div>
+      <div class="equip-card">
+        <span class="icon">&#128165;</span>
+        <h4>Klipsch R-10SWi</h4>
+        <p>重低音喇叭（無線的）</p>
+      </div>
+      <div class="equip-card">
+        <span class="icon">&#128250;</span>
+        <h4>電視</h4>
+        <p>顯示歌詞畫面</p>
+      </div>
+      <div class="equip-card">
+        <span class="icon">&#127908;</span>
+        <h4>無線麥克風 x2</h4>
+        <p>唱歌用</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Why need mixer -->
+  <div class="section">
+    <h2><span class="num">2</span> 每台設備做什麼事？</h2>
+
+    <div class="tip" style="font-size:20px;">
+      <strong>&#128161; 簡單記：三台各做一件事</strong>
+    </div>
+
+    <table>
+      <tr>
+        <th>設備</th><th>它的工作</th><th>比喻</th>
+      </tr>
+      <tr>
+        <td><strong>&#127916; 金嗓 CPX-900</strong></td>
+        <td>播放伴唱音樂和歌詞畫面</td>
+        <td>點唱機（只放音樂）</td>
+      </tr>
+      <tr>
+        <td><strong>&#127911; FIESTA 混音器</strong></td>
+        <td>把音樂+麥克風人聲混在一起，加迴音效果</td>
+        <td>調音師（把所有聲音調好）</td>
+      </tr>
+      <tr>
+        <td><strong>&#127932; Integra 擴大機</strong></td>
+        <td>把混好的聲音放大，推到喇叭發聲</td>
+        <td>大聲公（只負責放大聲音）</td>
+      </tr>
+    </table>
+
+    <div class="warn">
+      <strong>&#9888;&#65039; 為什麼需要 FIESTA 混音器？</strong><br>
+      因為 Integra 是「家庭劇院擴大機」，<strong>沒有麥克風插孔，也沒有迴音功能</strong>。<br>
+      一般卡拉OK專用擴大機才有內建混音，但我們的 Integra 沒有，所以需要 FIESTA 當中間人。
+    </div>
+  </div>
+
+  <!-- Section 3: Wiring diagram -->
+  <div class="section">
+    <h2><span class="num">3</span> 接線圖（照著接就好）</h2>
+
+    <div class="wiring">
+      <div class="wire-box source">&#127916; 金嗓 CPX-900 點歌機</div>
+
+      <div class="wire-split" style="margin-top:12px;">
+        <div>
+          <div class="wire-arrow">
+            <div class="label">&#128246; HDMI 線</div>
+            <div class="line"></div>
+          </div>
+          <div class="wire-box tv">&#128250; 電視<br><span style="font-size:14px; font-weight:normal;">看歌詞畫面</span></div>
+        </div>
+        <div>
+          <div class="wire-arrow">
+            <div class="label">&#127909; RCA 紅白線（音樂聲音）</div>
+            <div class="line"></div>
+          </div>
+          <div style="text-align:center; color:#bbb; font-size:14px;">&#8595; 往下接混音器 &#8595;</div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;"></div>
+
+      <div class="wire-side">
+        <div class="wire-box mic">&#127908; 無線麥克風 x2<br><span style="font-size:14px; font-weight:normal;">插在混音器上</span></div>
+        <span style="font-size:28px;">&#8594;</span>
+        <div class="wire-box mixer">&#127911; FIESTA 混音器<br><span style="font-size:14px; font-weight:normal;">音樂+人聲+迴音<br>全部在這裡混合</span></div>
+      </div>
+
+      <div class="wire-arrow">
+        <div class="label">&#127909; RCA 紅白線（混合好的聲音）</div>
+        <div class="line"></div>
+      </div>
+
+      <div class="wire-box amp">&#127932; Integra DTR-30.4 擴大機<br><span style="font-size:14px; font-weight:normal;">把聲音放大，推到喇叭</span></div>
+
+      <div class="wire-split" style="margin-top:12px;">
+        <div>
+          <div class="wire-arrow">
+            <div class="label">&#128268; 喇叭線（左+右）</div>
+            <div class="line"></div>
+          </div>
+          <div class="wire-box speaker">&#128266; ALR 落地喇叭<br><span style="font-size:14px; font-weight:normal;">左邊一支、右邊一支<br>人聲和伴奏從這裡出來</span></div>
+        </div>
+        <div>
+          <div class="wire-arrow">
+            <div class="label">&#128225; 無線發射器（插在 SUB OUT）</div>
+            <div class="line"></div>
+          </div>
+          <div style="text-align:center; font-size:14px; color:#aaa; margin:4px 0;">~ ~ ~ 無線 ~ ~ ~</div>
+          <div class="wire-box sub">&#128165; R-10SWi 重低音<br><span style="font-size:14px; font-weight:normal;">放角落，插電就好<br>低音震撼感從這裡來</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Section 4: Step by step -->
+  <div class="section">
+    <h2><span class="num">4</span> 接線步驟（一步一步來）</h2>
+
+    <div class="step">
+      <h3><span class="step-num">1</span> 金嗓 → 電視</h3>
+      <p>用 <strong>HDMI 線</strong>，從金嗓的 HDMI OUT 接到電視的 HDMI 輸入。</p>
+      <p>&#8594; 開電視就能看到歌詞畫面。</p>
+    </div>
+
+    <div class="step">
+      <h3><span class="step-num">2</span> 金嗓 → FIESTA 混音器</h3>
+      <p>用 <strong>RCA 紅白線</strong>，從金嗓背面的「音訊輸出」（紅+白孔）接到 FIESTA 的輸入孔。</p>
+      <p>&#8594; 音樂聲音送到混音器。</p>
+      <div class="tip">&#128161; 紅線接紅孔，白線接白孔，不要接反。</div>
+    </div>
+
+    <div class="step">
+      <h3><span class="step-num">3</span> 麥克風 → FIESTA 混音器</h3>
+      <p>兩支無線麥克風的接收器，用 <strong>6.3mm 線</strong>接到 FIESTA 的麥克風孔。</p>
+      <p>&#8594; 人聲送到混音器，跟音樂混在一起。</p>
+    </div>
+
+    <div class="step">
+      <h3><span class="step-num">4</span> FIESTA 混音器 → Integra 擴大機</h3>
+      <p>用 <strong>RCA 紅白線</strong>，從 FIESTA 的輸出接到 Integra 背面的 <strong>AUX</strong> 或 <strong>CD</strong> 輸入孔。</p>
+      <p>&#8594; 混好的聲音（音樂+人聲+迴音）送到擴大機。</p>
+    </div>
+
+    <div class="step">
+      <h3><span class="step-num">5</span> Integra → ALR 落地喇叭</h3>
+      <p>用<strong>喇叭線</strong>，從 Integra 背面的 <strong>FRONT L / R</strong> 接到兩支 ALR 落地喇叭。</p>
+      <p>&#8594; 聲音從喇叭出來了！</p>
+      <div class="warn">&#9888;&#65039; 注意正負極！紅線接紅（+），黑線接黑（-），兩支都要一樣。</div>
+    </div>
+
+    <div class="step">
+      <h3><span class="step-num">6</span> 重低音（最簡單）</h3>
+      <p>把 R-10SWi 附的小小<strong>無線發射器</strong>，插到 Integra 背面的 <strong>SUB OUT</strong> 孔。</p>
+      <p>R-10SWi 重低音喇叭放在<strong>客廳角落</strong>，<strong>插電</strong>就好。</p>
+      <p>&#8594; 自動無線連接，低音就有了！</p>
+    </div>
+  </div>
+
+  <!-- Section 5: Integra settings -->
+  <div class="section">
+    <h2><span class="num">5</span> Integra 擴大機設定</h2>
+
+    <p>用 Integra 的遙控器，進入設定選單：</p>
+
+    <table>
+      <tr><th>設定</th><th>選什麼</th><th>意思</th></tr>
+      <tr><td><strong>輸入來源</strong></td><td>選 <strong>AUX</strong> 或 <strong>CD</strong></td><td>就是你接混音器那個孔</td></tr>
+      <tr><td><strong>Front Speaker</strong></td><td><strong>Large</strong></td><td>讓落地喇叭全力發聲</td></tr>
+      <tr><td><strong>Subwoofer</strong></td><td><strong>Yes</strong></td><td>開啟重低音</td></tr>
+    </table>
+
+    <div class="tip">&#128161; 如果聽起來聲音怪怪的，可以跑一次 <strong>Audyssey 自動校正</strong>（遙控器按 Audyssey Setup），它會自動調整所有聲音。</div>
+  </div>
+
+  <!-- Section 6: Volume tips -->
+  <div class="section">
+    <h2><span class="num">6</span> 唱歌時的音量控制</h2>
+
+    <table>
+      <tr><th>旋鈕/音量</th><th>建議位置</th><th>為什麼</th></tr>
+      <tr><td><strong>Integra 主音量</strong></td><td>50-60%</td><td>不要開太大，保護喇叭</td></tr>
+      <tr><td><strong>FIESTA 音樂音量</strong></td><td>60-70%</td><td>伴唱音樂的大小聲</td></tr>
+      <tr><td><strong>FIESTA 麥克風音量</strong></td><td>40-50%</td><td>唱歌聲的大小聲</td></tr>
+      <tr><td><strong>FIESTA 迴音（Echo）</strong></td><td>30-40%</td><td>太多會糊掉，太少像在說話</td></tr>
+      <tr><td><strong>重低音 Volume</strong></td><td>50%（12 點鐘）</td><td>低音的大小聲</td></tr>
+    </table>
+
+    <div class="warn">
+      <strong>&#9888;&#65039; 最重要的一件事！</strong><br>
+      如果聽到「嗶～～～」的尖叫聲（麥克風回授），<strong>馬上把麥克風音量關小</strong>或把麥克風移開喇叭。<br>
+      這個聲音會傷喇叭！
+    </div>
+  </div>
+
+  <!-- Section 7: Shopping list -->
+  <div class="section">
+    <h2><span class="num">7</span> 需要買的線材</h2>
+
+    <table>
+      <tr><th>買什麼</th><th>接哪裡</th><th>大約多少錢</th></tr>
+      <tr><td>&#128268; RCA 紅白線 x2 條</td><td>金嗓→混音器、混音器→擴大機</td><td>NT$100-200/條</td></tr>
+      <tr><td>&#128268; 喇叭線 x2 條（各 2-3 米）</td><td>擴大機→左喇叭、擴大機→右喇叭</td><td>NT$200-500/條</td></tr>
+      <tr><td>&#128268; HDMI 線 x1 條</td><td>金嗓→電視</td><td>NT$200-400</td></tr>
+    </table>
+
+    <div class="tip">
+      &#128161; <strong>重低音不用買線！</strong>R-10SWi 是無線的，只需要把附的小發射器插到擴大機就好。
+    </div>
+
+    <p style="margin-top:16px; font-size:17px; color:#7f8c8d;">全部線材加起來大約 <strong>NT$600-1,500</strong>，蝦皮或光華商場都買得到。</p>
+  </div>
+
+  <!-- Section 8: Quick troubleshooting -->
+  <div class="section">
+    <h2><span class="num">8</span> 常見問題</h2>
+
+    <div class="step" style="border-left-color: #e94560;">
+      <h3>&#10060; 沒有聲音</h3>
+      <ul>
+        <li>Integra 的輸入有沒有選對？（選 AUX 或 CD）</li>
+        <li>FIESTA 混音器有沒有開機？</li>
+        <li>RCA 線有沒有插好？（紅對紅、白對白）</li>
+        <li>Integra 音量是不是轉到最小了？</li>
+      </ul>
+    </div>
+
+    <div class="step" style="border-left-color: #f39c12;">
+      <h3>&#10060; 有音樂但沒有麥克風聲音</h3>
+      <ul>
+        <li>麥克風有沒有開？（電池有沒有電？）</li>
+        <li>麥克風接收器有沒有插在 FIESTA 上？</li>
+        <li>FIESTA 的麥克風音量有沒有開？</li>
+      </ul>
+    </div>
+
+    <div class="step" style="border-left-color: #9b59b6;">
+      <h3>&#10060; 沒有低音震撼感</h3>
+      <ul>
+        <li>R-10SWi 重低音有沒有<strong>插電？</strong></li>
+        <li>前面的電源燈有沒有亮？</li>
+        <li>無線發射器有沒有插在 Integra 的 SUB OUT？</li>
+        <li>Integra 設定裡 Subwoofer 是不是 Yes？</li>
+      </ul>
+    </div>
+
+    <div class="step" style="border-left-color: #e94560;">
+      <h3>&#10060; 嗶～～ 尖叫聲（回授）</h3>
+      <ul>
+        <li><strong>馬上把麥克風音量關小！</strong></li>
+        <li>麥克風不要對著喇叭</li>
+        <li>人站在喇叭前面唱，不要站在旁邊</li>
+        <li>確認 FIESTA 的「防嘯叫」功能有開</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    有問題就打電話給我！&#128222;
+  </div>
+
+</div>
+
+</body>
+</html>
