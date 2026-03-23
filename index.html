@@ -125,133 +125,146 @@ th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
   th, td { padding: 10px 8px; font-size: 15px; }
 }
 
-/* ========== WIRING DIAGRAM V2 ========== */
-.wiring-v2 {
-  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
-  border-radius: 20px;
-  padding: 40px 24px 36px;
-  color: #fff;
-  margin: 20px 0;
-  position: relative;
-  overflow: hidden;
-}
-.wiring-v2::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background:
-    radial-gradient(ellipse 600px 300px at 20% 10%, rgba(46,204,113,0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 500px 400px at 80% 90%, rgba(155,89,182,0.06) 0%, transparent 70%);
-  pointer-events: none;
-}
-.wiring-v2 .diagram-title {
-  text-align: center;
-  font-size: clamp(20px, 5vw, 26px);
-  font-weight: 800;
-  margin-bottom: 8px;
-  letter-spacing: 0.03em;
-}
-.wiring-v2 .diagram-subtitle {
-  text-align: center;
-  font-size: 15px;
-  color: rgba(255,255,255,0.55);
-  margin-bottom: 32px;
-}
-.dev-box {
-  position: relative;
+/* ========== WIRING DIAGRAM V3 - Simple ========== */
+.wiring-simple {
+  background: #f8f9ff;
   border-radius: 16px;
-  padding: 18px 20px;
+  padding: 28px 20px;
+  margin: 20px 0;
+  border: 2px solid #e0e5ee;
+}
+.wiring-simple .ws-title {
   text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin-bottom: 6px;
+}
+.wiring-simple .ws-subtitle {
+  text-align: center;
+  font-size: 16px;
+  color: #888;
+  margin-bottom: 24px;
+}
+.ws-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 14px 12px;
+  margin: 8px 0;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.ws-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 18px;
+  color: #fff;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+.ws-dev {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 700;
   font-size: 17px;
-  line-height: 1.5;
-  max-width: 340px;
-  margin: 0 auto;
-  border: 2px solid;
-  transition: transform 0.2s, box-shadow 0.2s;
+  color: #1a1a2e;
+  min-width: 0;
 }
-.dev-box:hover { transform: translateY(-2px); }
-.dev-box .dev-icon { font-size: 36px; display: block; margin-bottom: 4px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3)); }
-.dev-box .dev-name { font-size: clamp(16px, 4vw, 19px); font-weight: 800; }
-.dev-box .dev-desc { font-size: 14px; font-weight: 400; opacity: 0.8; margin-top: 4px; line-height: 1.4; }
-.badge-planned {
-  display: inline-block;
-  background: linear-gradient(135deg, #f39c12, #e67e22);
-  color: #fff;
-  font-size: 12px;
+.ws-dev .ws-emoji { font-size: 28px; flex-shrink: 0; }
+.ws-dev .ws-label { white-space: nowrap; }
+.ws-cable {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 10px;
+  flex-shrink: 0;
+}
+.ws-cable-line {
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  position: relative;
+}
+.ws-cable-name {
+  font-size: 13px;
   font-weight: 700;
   padding: 3px 10px;
-  border-radius: 20px;
-  position: absolute;
-  top: -12px;
-  right: -8px;
-  box-shadow: 0 2px 8px rgba(243,156,18,0.5);
-  animation: badge-pulse 2.5s ease-in-out infinite;
+  border-radius: 16px;
+  white-space: nowrap;
 }
-@keyframes badge-pulse {
-  0%, 100% { box-shadow: 0 2px 8px rgba(243,156,18,0.5); }
-  50% { box-shadow: 0 2px 16px rgba(243,156,18,0.8); }
+.ws-arrow {
+  font-size: 22px;
+  font-weight: 900;
+  flex-shrink: 0;
 }
-.dev-source { border-color: #2ecc71; background: rgba(46,204,113,0.12); box-shadow: 0 0 20px rgba(46,204,113,0.15); }
-.dev-source:hover { box-shadow: 0 0 30px rgba(46,204,113,0.3); }
-.dev-source .dev-name { color: #5dfc8a; }
-.dev-mixer { border-color: #f39c12; background: rgba(243,156,18,0.12); box-shadow: 0 0 20px rgba(243,156,18,0.15); }
-.dev-mixer:hover { box-shadow: 0 0 30px rgba(243,156,18,0.3); }
-.dev-mixer .dev-name { color: #ffc048; }
-.dev-amp { border-color: #e94560; background: rgba(233,69,96,0.12); box-shadow: 0 0 20px rgba(233,69,96,0.15); }
-.dev-amp:hover { box-shadow: 0 0 30px rgba(233,69,96,0.3); }
-.dev-amp .dev-name { color: #ff7b93; }
-.dev-tv { border-color: #3498db; background: rgba(52,152,219,0.12); box-shadow: 0 0 20px rgba(52,152,219,0.15); }
-.dev-tv:hover { box-shadow: 0 0 30px rgba(52,152,219,0.3); }
-.dev-tv .dev-name { color: #6ec6ff; }
-.dev-speaker { border-color: #ff6b4a; background: rgba(255,107,74,0.12); box-shadow: 0 0 20px rgba(255,107,74,0.15); }
-.dev-speaker:hover { box-shadow: 0 0 30px rgba(255,107,74,0.3); }
-.dev-speaker .dev-name { color: #ff9a85; }
-.dev-sub { border-color: #9b59b6; background: rgba(155,89,182,0.12); box-shadow: 0 0 20px rgba(155,89,182,0.15); }
-.dev-sub:hover { box-shadow: 0 0 30px rgba(155,89,182,0.3); }
-.dev-sub .dev-name { color: #c89bdb; }
-.dev-mic { border-color: #1abc9c; background: rgba(26,188,156,0.12); box-shadow: 0 0 20px rgba(26,188,156,0.15); }
-.dev-mic:hover { box-shadow: 0 0 30px rgba(26,188,156,0.3); }
-.dev-mic .dev-name { color: #5ce8c6; }
-.conn { display: flex; flex-direction: column; align-items: center; padding: 6px 0; }
-.conn-label { font-size: 13px; font-weight: 600; padding: 4px 14px; border-radius: 20px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); white-space: nowrap; margin-bottom: 4px; }
-.conn-pipe { width: 4px; height: 30px; border-radius: 2px; position: relative; overflow: hidden; }
-.conn-pipe::after { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.7), transparent); animation: flow-down 2s ease-in-out infinite; }
-@keyframes flow-down { 0% { top: -100%; } 100% { top: 200%; } }
-.conn-arrow { font-size: 18px; line-height: 1; margin-top: -2px; }
-.pipe-hdmi { background: #3498db; }
-.pipe-rca { background: #e74c3c; }
-.pipe-63mm { background: #1abc9c; }
-.pipe-spk { background: #ff6b4a; }
-.pipe-wireless { background: #9b59b6; }
-.pipe-optical { background: #ff9800; }
-.label-hdmi { color: #6ec6ff; border-color: rgba(52,152,219,0.4); }
-.label-rca { color: #ff8a80; border-color: rgba(231,76,60,0.4); }
-.label-63mm { color: #5ce8c6; border-color: rgba(26,188,156,0.4); }
-.label-spk { color: #ff9a85; border-color: rgba(255,107,74,0.4); }
-.label-wireless { color: #c89bdb; border-color: rgba(155,89,182,0.4); }
-.label-optical { color: #ffcc80; border-color: rgba(255,152,0,0.4); }
-.diagram-row-center { display: flex; flex-direction: column; align-items: center; }
-.branch-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 600px; margin: 0 auto; }
-.branch-col { display: flex; flex-direction: column; align-items: center; }
-.side-input-row { display: flex; align-items: center; justify-content: center; gap: 16px; max-width: 600px; margin: 0 auto; flex-wrap: wrap; }
-.side-conn { display: flex; align-items: center; gap: 8px; }
-.side-conn .conn-pipe-h { width: 40px; height: 4px; border-radius: 2px; position: relative; overflow: hidden; }
-.side-conn .conn-pipe-h::after { content: ''; position: absolute; left: -100%; top: 0; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent); animation: flow-right 2s ease-in-out infinite; }
-@keyframes flow-right { 0% { left: -100%; } 100% { left: 200%; } }
-.side-conn .conn-label { margin-bottom: 0; font-size: 12px; padding: 3px 10px; }
-.side-conn .side-arrow { font-size: 20px; color: rgba(255,255,255,0.5); }
-.output-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 600px; margin: 0 auto; }
-.output-col { display: flex; flex-direction: column; align-items: center; }
-.wireless-waves { text-align: center; font-size: 13px; color: #c89bdb; letter-spacing: 3px; padding: 4px 0; animation: wave-fade 2s ease-in-out infinite; }
-@keyframes wave-fade { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-.wire-legend { margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); }
-.wire-legend h4 { text-align: center; font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 16px; letter-spacing: 0.1em; }
-.legend-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px 16px; max-width: 560px; margin: 0 auto; }
-.legend-item, .legend-cable { display: flex; align-items: center; gap: 10px; font-size: 14px; }
-.legend-swatch { width: 14px; height: 14px; border-radius: 4px; border: 2px solid; flex-shrink: 0; }
-.legend-line { width: 28px; height: 4px; border-radius: 2px; flex-shrink: 0; }
-.legend-section-title { font-size: 13px; color: rgba(255,255,255,0.45); font-weight: 600; margin-bottom: 4px; margin-top: 14px; text-align: center; }
+.ws-purpose {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+  margin-top: 4px;
+  padding-top: 6px;
+  border-top: 1px dashed #e8e8e8;
+}
+.ws-badge-buy {
+  display: inline-block;
+  background: #fff3cd;
+  color: #856404;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 10px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+/* Cable color themes */
+.ws-hdmi .ws-num { background: #1a73e8; }
+.ws-hdmi .ws-cable-line { background: #1a73e8; }
+.ws-hdmi .ws-cable-name { background: #e3f2fd; color: #1a73e8; }
+.ws-hdmi .ws-arrow { color: #1a73e8; }
+
+.ws-optical .ws-num { background: #e65100; }
+.ws-optical .ws-cable-line { background: #ff9800; }
+.ws-optical .ws-cable-name { background: #fff3e0; color: #e65100; }
+.ws-optical .ws-arrow { color: #e65100; }
+
+.ws-63mm .ws-num { background: #1e8449; }
+.ws-63mm .ws-cable-line { background: #27ae60; }
+.ws-63mm .ws-cable-name { background: #e8f5e9; color: #1e8449; }
+.ws-63mm .ws-arrow { color: #1e8449; }
+
+.ws-rca .ws-num { background: #c0392b; }
+.ws-rca .ws-cable-line { background: #e74c3c; }
+.ws-rca .ws-cable-name { background: #ffebee; color: #c0392b; }
+.ws-rca .ws-arrow { color: #c0392b; }
+
+.ws-spk .ws-num { background: #d84315; }
+.ws-spk .ws-cable-line { background: #ff6b4a; }
+.ws-spk .ws-cable-name { background: #fbe9e7; color: #d84315; }
+.ws-spk .ws-arrow { color: #d84315; }
+
+.ws-wireless .ws-num { background: #7b1fa2; }
+.ws-wireless .ws-cable-line { background: #9b59b6; border-style: dashed; height: 0; border-top: 4px dashed #9b59b6; }
+.ws-wireless .ws-cable-name { background: #f3e5f5; color: #7b1fa2; }
+.ws-wireless .ws-arrow { color: #7b1fa2; }
+
+@media (max-width: 500px) {
+  .ws-row { padding: 12px 8px; gap: 4px; }
+  .ws-dev .ws-label { font-size: 14px; }
+  .ws-cable { margin: 0 4px; }
+  .ws-cable-line { width: 20px; }
+  .ws-num { width: 30px; height: 30px; font-size: 15px; margin-right: 8px; }
+}
 
 /* ===== Wiring Steps V2 ===== */
 .wire-step-card { background: #fff; border-radius: 16px; margin: 28px 0; overflow: hidden; box-shadow: 0 3px 16px rgba(0,0,0,0.10); border: 2px solid #e8ecf1; }
@@ -337,15 +350,6 @@ th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
 
 /* Responsive */
 @media (max-width: 600px) {
-  .wiring-v2 { padding: 28px 14px; }
-  .dev-box { padding: 14px; max-width: 100%; font-size: 15px; }
-  .dev-box .dev-icon { font-size: 30px; }
-  .dev-box .dev-name { font-size: 15px; }
-  .branch-row, .output-row { grid-template-columns: 1fr; gap: 0; }
-  .side-input-row { flex-direction: column; gap: 0; }
-  .side-conn { flex-direction: column; }
-  .side-conn .conn-pipe-h { width: 4px; height: 28px; }
-  .side-conn .side-arrow { transform: rotate(90deg); }
   .step-header { padding: 16px 14px; gap: 10px; }
   .step-circle { width: 44px; height: 44px; min-width: 44px; font-size: 22px; }
   .step-device-flow { font-size: 18px; }
@@ -570,122 +574,141 @@ th { background: #f0f4ff; font-weight: 700; color: #1a1a2e; }
     </div>
   </div>
 
-  <!-- Section 3: Wiring diagram (IMPROVED) -->
+  <!-- Section 3: Wiring diagram (SIMPLE) -->
   <div class="section">
     <h2><span class="num">3</span> 接線圖（照著接就好）</h2>
-    <div class="wiring-v2">
-      <div class="diagram-title">&#128268; 信號流向圖</div>
-      <div class="diagram-subtitle">從音樂來源到你耳朵聽到的聲音，每一步怎麼走</div>
-      <div class="diagram-row-center">
-        <div class="dev-box dev-source" style="max-width:380px;">
-          <span class="badge-planned">&#128722; 預計購買</span>
-          <span class="dev-icon">&#127916;</span>
-          <div class="dev-name">金嗓 CPX-900 點歌機</div>
-          <div class="dev-desc">播放伴唱音樂，螢幕顯示歌詞</div>
+    <div class="wiring-simple">
+      <div class="ws-title">總共只要接 6 條線</div>
+      <div class="ws-subtitle">從上往下看，每一行就是一條線的接法</div>
+
+      <!-- Connection 1: HDMI -->
+      <div class="ws-row ws-hdmi">
+        <span class="ws-num">1</span>
+        <div class="ws-dev">
+          <span class="ws-emoji">&#127916;</span>
+          <span class="ws-label">金嗓 點歌機<span class="ws-badge-buy">預計購買</span></span>
         </div>
+        <div class="ws-cable">
+          <div class="ws-cable-line"></div>
+          <span class="ws-cable-name">HDMI</span>
+          <div class="ws-cable-line"></div>
+        </div>
+        <span class="ws-arrow">&#10132;</span>
+        <div class="ws-dev">
+          <span class="ws-emoji">&#128250;</span>
+          <span class="ws-label">電視</span>
+        </div>
+        <div class="ws-purpose">&#128245; 顯示歌詞畫面用（藍色扁扁的接頭）</div>
       </div>
-      <div class="branch-row" style="margin-top:4px;">
-        <div class="branch-col">
-          <div class="conn">
-            <span class="conn-label label-hdmi">&#128246; HDMI</span>
-            <div class="conn-pipe pipe-hdmi"></div>
-            <span class="conn-arrow" style="color:#3498db;">&#9660;</span>
-          </div>
-          <div class="dev-box dev-tv" style="max-width:240px;">
-            <span class="dev-icon">&#128250;</span>
-            <div class="dev-name">電視</div>
-            <div class="dev-desc">顯示歌詞畫面</div>
-          </div>
+
+      <!-- Connection 2: Optical -->
+      <div class="ws-row ws-optical">
+        <span class="ws-num">2</span>
+        <div class="ws-dev">
+          <span class="ws-emoji">&#127916;</span>
+          <span class="ws-label">金嗓 點歌機<span class="ws-badge-buy">預計購買</span></span>
         </div>
-        <div class="branch-col">
-          <div class="conn">
-            <span class="conn-label label-optical">&#128308; 光纖線 (TOSLINK)</span>
-            <div class="conn-pipe pipe-optical"></div>
-            <span class="conn-arrow" style="color:#ff9800;">&#9660;</span>
-          </div>
-          <div style="font-size:13px; color:rgba(255,255,255,0.4); text-align:center;">音樂聲音往下送</div>
+        <div class="ws-cable">
+          <div class="ws-cable-line"></div>
+          <span class="ws-cable-name">光纖線</span>
+          <div class="ws-cable-line"></div>
         </div>
+        <span class="ws-arrow">&#10132;</span>
+        <div class="ws-dev">
+          <span class="ws-emoji">&#127911;</span>
+          <span class="ws-label">FIESTA 混音器</span>
+        </div>
+        <div class="ws-purpose">&#127925; 傳送伴唱音樂（透明線、方形接頭、會發紅光）</div>
       </div>
-      <div class="side-input-row" style="margin-top:14px;">
-        <div class="dev-box dev-mic" style="max-width:220px;">
-          <span class="dev-icon">&#127908;</span>
-          <div class="dev-name">無線麥克風 x2</div>
-          <div class="dev-desc">唱歌用，接收器輸出</div>
+
+      <!-- Connection 3: 6.3mm mic -->
+      <div class="ws-row ws-63mm">
+        <span class="ws-num">3</span>
+        <div class="ws-dev">
+          <span class="ws-emoji">&#127908;</span>
+          <span class="ws-label">無線麥克風 x2</span>
         </div>
-        <div class="side-conn">
-          <span class="conn-label label-63mm">&#127926; 6.3mm</span>
-          <div class="conn-pipe-h pipe-63mm"></div>
-          <span class="side-arrow">&#9654;</span>
+        <div class="ws-cable">
+          <div class="ws-cable-line"></div>
+          <span class="ws-cable-name">6.3mm</span>
+          <div class="ws-cable-line"></div>
         </div>
-        <div class="dev-box dev-mixer" style="max-width:280px;">
-          <span class="dev-icon">&#127911;</span>
-          <div class="dev-name">FIESTA KARASTAR 混音器</div>
-          <div class="dev-desc">音樂 + 人聲 + 迴音<br>全部在這裡混合</div>
+        <span class="ws-arrow">&#10132;</span>
+        <div class="ws-dev">
+          <span class="ws-emoji">&#127911;</span>
+          <span class="ws-label">FIESTA 混音器</span>
         </div>
+        <div class="ws-purpose">&#127897;&#65039; 傳送唱歌人聲（粗的耳機頭，接 MIC 1 和 MIC 2）</div>
       </div>
-      <div class="diagram-row-center" style="margin-top:4px;">
-        <div class="conn">
-          <span class="conn-label label-rca">&#127909; RCA 紅白線（混合後的聲音）</span>
-          <div class="conn-pipe pipe-rca"></div>
-          <span class="conn-arrow" style="color:#e74c3c;">&#9660;</span>
+
+      <!-- Connection 4: RCA out -->
+      <div class="ws-row ws-rca">
+        <span class="ws-num">4</span>
+        <div class="ws-dev">
+          <span class="ws-emoji">&#127911;</span>
+          <span class="ws-label">FIESTA 混音器</span>
         </div>
+        <div class="ws-cable">
+          <div class="ws-cable-line"></div>
+          <span class="ws-cable-name">RCA 紅白線</span>
+          <div class="ws-cable-line"></div>
+        </div>
+        <span class="ws-arrow">&#10132;</span>
+        <div class="ws-dev">
+          <span class="ws-emoji">&#127932;</span>
+          <span class="ws-label">Integra 擴大機</span>
+        </div>
+        <div class="ws-purpose">&#127927; 混合後的聲音送去放大（紅頭插紅孔、白頭插白孔）</div>
       </div>
-      <div class="diagram-row-center">
-        <div class="dev-box dev-amp" style="max-width:380px;">
-          <span class="dev-icon">&#127932;</span>
-          <div class="dev-name">Integra DTR-30.4 擴大機</div>
-          <div class="dev-desc">把混好的聲音放大，推動喇叭發聲</div>
+
+      <!-- Connection 5: Speaker wire -->
+      <div class="ws-row ws-spk">
+        <span class="ws-num">5</span>
+        <div class="ws-dev">
+          <span class="ws-emoji">&#127932;</span>
+          <span class="ws-label">Integra 擴大機</span>
         </div>
+        <div class="ws-cable">
+          <div class="ws-cable-line"></div>
+          <span class="ws-cable-name">喇叭線 x2</span>
+          <div class="ws-cable-line"></div>
+        </div>
+        <span class="ws-arrow">&#10132;</span>
+        <div class="ws-dev">
+          <span class="ws-emoji">&#128266;</span>
+          <span class="ws-label">ALR 落地喇叭</span>
+        </div>
+        <div class="ws-purpose">&#128264; 左右各一支，聲音從這裡出來（銅線鎖螺絲）</div>
       </div>
-      <div class="output-row" style="margin-top:4px;">
-        <div class="output-col">
-          <div class="conn">
-            <span class="conn-label label-spk">&#128268; 喇叭線 (左+右)</span>
-            <div class="conn-pipe pipe-spk"></div>
-            <span class="conn-arrow" style="color:#ff6b4a;">&#9660;</span>
-          </div>
-          <div class="dev-box dev-speaker" style="max-width:260px;">
-            <span class="dev-icon">&#128266;</span>
-            <div class="dev-name">ALR Nummer 3 落地喇叭</div>
-            <div class="dev-desc">左右各一支<br>人聲和伴奏從這裡出來</div>
-          </div>
+
+      <!-- Connection 6: Wireless sub -->
+      <div class="ws-row ws-wireless">
+        <span class="ws-num">6</span>
+        <div class="ws-dev">
+          <span class="ws-emoji">&#127932;</span>
+          <span class="ws-label">Integra 擴大機</span>
         </div>
-        <div class="output-col">
-          <div class="conn">
-            <span class="conn-label label-wireless">&#128225; SUB OUT 無線發射</span>
-            <div class="conn-pipe pipe-wireless"></div>
-            <span class="conn-arrow" style="color:#9b59b6;">&#9660;</span>
-          </div>
-          <div class="wireless-waves">~ ~ ~ &#128752; 無線連接 ~ ~ ~</div>
-          <div class="dev-box dev-sub" style="max-width:260px;">
-            <span class="dev-icon">&#128165;</span>
-            <div class="dev-name">Klipsch R-10SWi 重低音</div>
-            <div class="dev-desc">放角落，插電就好<br>低音震撼感從這裡來</div>
-          </div>
+        <div class="ws-cable">
+          <div class="ws-cable-line"></div>
+          <span class="ws-cable-name">&#128752; 無線</span>
+          <div class="ws-cable-line"></div>
         </div>
+        <span class="ws-arrow">~ ~</span>
+        <div class="ws-dev">
+          <span class="ws-emoji">&#128165;</span>
+          <span class="ws-label">Klipsch 重低音</span>
+        </div>
+        <div class="ws-purpose">&#128293; 低音震撼！插上發射器 + 重低音插電就好，不用拉線</div>
       </div>
-      <div class="wire-legend">
-        <h4>&#128209; 圖例說明</h4>
-        <div class="legend-section-title">設備類型</div>
-        <div class="legend-grid">
-          <div class="legend-item"><span class="legend-swatch" style="background:rgba(46,204,113,0.2); border-color:#2ecc71;"></span><span style="color:#5dfc8a;">音源設備</span></div>
-          <div class="legend-item"><span class="legend-swatch" style="background:rgba(26,188,156,0.2); border-color:#1abc9c;"></span><span style="color:#5ce8c6;">麥克風</span></div>
-          <div class="legend-item"><span class="legend-swatch" style="background:rgba(243,156,18,0.2); border-color:#f39c12;"></span><span style="color:#ffc048;">混音器</span></div>
-          <div class="legend-item"><span class="legend-swatch" style="background:rgba(233,69,96,0.2); border-color:#e94560;"></span><span style="color:#ff7b93;">擴大機</span></div>
-          <div class="legend-item"><span class="legend-swatch" style="background:rgba(52,152,219,0.2); border-color:#3498db;"></span><span style="color:#6ec6ff;">電視</span></div>
-          <div class="legend-item"><span class="legend-swatch" style="background:rgba(255,107,74,0.2); border-color:#ff6b4a;"></span><span style="color:#ff9a85;">喇叭</span></div>
-          <div class="legend-item"><span class="legend-swatch" style="background:rgba(155,89,182,0.2); border-color:#9b59b6;"></span><span style="color:#c89bdb;">重低音</span></div>
-        </div>
-        <div class="legend-section-title">線材類型</div>
-        <div class="legend-grid">
-          <div class="legend-cable"><span class="legend-line" style="background:#3498db;"></span><span style="color:#6ec6ff;">HDMI</span></div>
-          <div class="legend-cable"><span class="legend-line" style="background:#ff9800;"></span><span style="color:#ffcc80;">光纖線 (TOSLINK)</span></div>
-          <div class="legend-cable"><span class="legend-line" style="background:#e74c3c;"></span><span style="color:#ff8a80;">RCA 紅白線</span></div>
-          <div class="legend-cable"><span class="legend-line" style="background:#1abc9c;"></span><span style="color:#5ce8c6;">6.3mm</span></div>
-          <div class="legend-cable"><span class="legend-line" style="background:#ff6b4a;"></span><span style="color:#ff9a85;">喇叭線</span></div>
-          <div class="legend-cable"><span class="legend-line" style="background:#9b59b6;"></span><span style="color:#c89bdb;">無線</span></div>
-        </div>
+
+      <!-- Summary note -->
+      <div style="margin-top:20px; padding:16px; background:#e8f5e9; border-radius:12px; text-align:center; font-size:17px; color:#2e7d32; font-weight:600;">
+        &#9989; 就這樣！6 條線接完，整套卡拉OK 就能唱了
       </div>
+    </div>
+  </div>
+
+  <!-- Section 4      </div>
     </div>
   </div>
 
